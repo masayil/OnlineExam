@@ -1,0 +1,7 @@
+@font-face {font-family: "icon";
+  src: url('../font/iconfont.eot?');
+  src: url('../font/iconfont.eot?') format('embedded-opentype'),
+  url('../font/iconfont.woff?') format('woff'),
+  url('../font/iconfont.ttf?') format('truetype'),
+  url('../font/iconfont.svg?') format('svg');
+}

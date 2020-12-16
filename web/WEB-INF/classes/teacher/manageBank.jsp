@@ -67,7 +67,7 @@
     <br>
     <form class="form-inline" role="form">
     <div class="form-group">
-    题&emsp;目：<input type="text" class="form-control" id="title" placeholder="请输入题目关键字" style="width: 250px;">
+    题&emsp;目：<input type="text" class="form-control" id="title" placeholder="请输入题目关键字" style="width: 250px;" autocomplete="off">
 </div>&emsp;&emsp;
     <button type="submit" class="btn btn-warning" style="width: 90px;" onclick="openBank2('title_name','none')">检索</button>
     </form>

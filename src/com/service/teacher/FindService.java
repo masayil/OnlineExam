@@ -44,4 +44,8 @@ public class FindService {
         String sql="select * from course where course_creator=?";
         return FindDao.getCourseListDao(con,t_department,sql);
     }
+    public static boolean deleteBankService(Connection con,String serialNumber){
+        String sql="delete from questionBank where questionBank_serialNumber=?";
+        return FindDao.deleteBankDao(con,serialNumber,sql);
+    }
 }

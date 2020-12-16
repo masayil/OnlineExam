@@ -167,7 +167,7 @@
                 </c:choose>
             </td>
             <td style="width: 250px;">${banklist.questionBank_answer}</td>
-            <td><button type="button" class="btn btn-danger" onclick="deletebank(this,'${banklist.questionBank_serialNumber}')">删除</button></td>
+            <td><button type="button" class="btn btn-danger" onclick="deletebank(this,'${banklist.questionBank_serialNumber}','${category}')">删除</button></td>
             </tr>
         </c:forEach>
         </tbody>
@@ -224,7 +224,9 @@
             window.location.href = "OpenBankServlet?category=" + category + "&questiontype=" + questiontype+"&title="+document.getElementById("search").value;
         }
     }
-    function deletebank(thisone,serialNumber) {
+    function deletebank(thisone,serialNumber,category) {
+        var questiontype= $("input[name='q_type']:checked").val();
+        var text="";
         if(confirm("确认删除？")) {
             $.ajax({
                 url: "DeleteBankServlet",
@@ -236,7 +238,7 @@
                 success: function (flag) {
                     if (flag === "yes") {
                         alert("删除成功");
-                        $(thisone).parent().parent().remove();
+                        window.location.href="OpenBankServlet?category="+category+"&questiontype="+questiontype+"&title="+text;
                     } else if (flag === "no") {
                         alert("删除失败，再试一次！");
                     } else if (flag === "busy") {

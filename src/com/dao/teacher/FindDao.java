@@ -218,4 +218,21 @@ public class FindDao {
         }
         return courseArrayList;
     }
+
+    public static boolean deleteBankDao(Connection con,String serialNumber,String sql){
+        PreparedStatement ps = null;
+        try{
+            ps=con.prepareStatement(sql);
+            ps.setString(1,serialNumber);
+            int i=ps.executeUpdate();
+            if(i==1){
+                return true;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            Pool.close(ps);
+        }
+        return false;
+    }
 }

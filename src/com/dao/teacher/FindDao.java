@@ -235,4 +235,24 @@ public class FindDao {
         }
         return false;
     }
+
+    public static ArrayList<Integer> CreatePaperDao(Connection con,String course,String sql){
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ArrayList<Integer> count=new ArrayList<Integer>();
+        try{
+            ps=con.prepareStatement(sql);
+            ps.setString(1,course);
+            rs=ps.executeQuery();
+            while (rs.next()){
+                int mark=rs.getInt("questionBank_type");
+                count.add(mark);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            Pool.closeDBResource(rs,ps);
+        }
+        return count;
+    }
 }

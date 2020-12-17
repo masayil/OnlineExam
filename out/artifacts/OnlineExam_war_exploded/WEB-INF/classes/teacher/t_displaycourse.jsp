@@ -33,7 +33,7 @@
         <div class="sy-title">新课程</div>
         <div class="sy-content">
             <div class="form">
-                <p class="input-item">课&emsp;&emsp;程：<select id="lesson_course" style="width: 200px;">
+                <p class="input-item">科&emsp;&emsp;目：<select id="lesson_course" style="width: 200px;">
                     <option value="">---</option>
                     <c:forEach var="courselist" items="${requestScope.courselist}">
                         <option value=${courselist.course_name}>${courselist.course_name}</option>
@@ -58,8 +58,8 @@
                 <li>
                     <span>
                         <img src="${pageContext.request.contextPath}/img/course_logo.png" alt="图片">
-                        <h5>课程名：${teacherlesson.newlesson_name}</h5>
-                        <h5>授课班级：${teacherlesson.newlesson_class}</h5>
+                        <h5 style="color: darkgoldenrod;">科目：${teacherlesson.newlesson_name}</h5>
+                        <h5 style="color: cornflowerblue;">授课班级：${teacherlesson.newlesson_class}</h5>
                         <h5>开设时间：${teacherlesson.newlesson_createDate}</h5>
                         课程号：<input type="text"    value=${teacherlesson.newlesson_uuid} readonly style="border:none; width:250px;font-size: 8px;">
                         <b></b>

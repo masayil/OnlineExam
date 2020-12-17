@@ -73,17 +73,17 @@
     <div class="sy-title">新试卷</div>
     <div class="sy-content">
         <div class="form">
-            <p class="input-item">课&emsp;&emsp;程：<select id="lesson_course" style="width: 200px;">
-                <option value="">---</option>
-
-                    <option value="">11</option>
-
+            <p class="input-item">科&emsp;&emsp;目：<select id="lesson_course" style="width: 200px;">
+                <option value="none">---</option>
+                <c:forEach items="${requestScope.choosecourse}" var="choosecourse">
+                    <option value=${choosecourse.course_name}>${choosecourse.course_name}</option>
+                </c:forEach>
             </select></p>
         </div>
     </div>
     <div class="sy-btn">
         <button onClick="syalert.syhide('newpaper')">取消</button>
-        <button type="button" id="addnewpaper">确定</button>
+        <button type="button" id="createOnepaper" onclick="createpaper()">下一步</button>
     </div>
 </div>
 <div style="padding-left: 200px;padding-top: 50px;">
@@ -143,7 +143,14 @@
             });
         }
     }
-
+    function createpaper() {
+        var course=document.getElementById("lesson_course").value;
+        if(course==="none"){
+            alert("请选择科目");
+        }else{
+            window.location.href="CreatePaperServlet?course="+course;
+        }
+    }
 </script>
 </body>
 </html>

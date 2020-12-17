@@ -4,6 +4,8 @@ import com.bean.entity.*;
 import com.dao.teacher.FindDao;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FindService {
     public static ArrayList<Majorclass> majorclassService(Connection con){
@@ -47,5 +49,38 @@ public class FindService {
     public static boolean deleteBankService(Connection con,String serialNumber){
         String sql="delete from questionBank where questionBank_serialNumber=?";
         return FindDao.deleteBankDao(con,serialNumber,sql);
+    }
+    public static HashMap<String, Integer> CreatePaperService(Connection con,String course){
+        String sql="select questionBank_type from questionBank where questionBank_course=?";
+        ArrayList<Integer> count;
+        count=FindDao.CreatePaperDao(con,course,sql);
+        HashMap<String, Integer> map= new HashMap<>();
+        int type1=0;
+        int type2=0;
+        int type3=0;
+        int type4=0;
+        int a;
+        for (Integer integer : count) {
+            a = integer;
+            switch (a) {
+                case 1:
+                    type1++;
+                    break;
+                case 2:
+                    type2++;
+                    break;
+                case 3:
+                    type3++;
+                    break;
+                case 4:
+                    type4++;
+                    break;
+            }
+        }
+        map.put("单选题",type1);
+        map.put("多选题",type2);
+        map.put("判断题",type3);
+        map.put("简答题",type4);
+        return map;
     }
 }

@@ -128,7 +128,7 @@
             <td style="width: 70px;color: #313944;">
                 <c:choose>
                     <c:when test="${banklist.questionBank_type eq 1}"><strong>单选题</strong></c:when>
-                    <c:when test="${banklist.questionBank_type eq 2}"><strong>多项题</strong></c:when>
+                    <c:when test="${banklist.questionBank_type eq 2}"><strong>多选题</strong></c:when>
                     <c:when test="${banklist.questionBank_type eq 3}"><strong>判断题</strong></c:when>
                     <c:otherwise><strong>简答题</strong></c:otherwise>
                 </c:choose>

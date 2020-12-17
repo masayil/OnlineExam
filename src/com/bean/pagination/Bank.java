@@ -12,7 +12,7 @@ import java.util.ArrayList;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Bank {
-    public static int OnePageNum=2;
+    public static int OnePageNum=30;
     private int curPage;
     private int totalpage;
     private ArrayList<QuestionBank> questionBankList;

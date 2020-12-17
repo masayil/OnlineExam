@@ -26,7 +26,7 @@ public class GetTempletServlet extends HttpServlet {
             out=response.getOutputStream();
             out.flush();
             int aRead=0;
-            byte b[]=new byte[1024];
+            byte[] b =new byte[1024];
             while ((aRead=in.read(b))!=-1&in!=null){
                 out.write(b,0,aRead);
             }

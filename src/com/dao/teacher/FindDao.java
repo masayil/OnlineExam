@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class FindDao {
     public static ArrayList<Majorclass> majorclassDao(Connection con,String sql){
@@ -254,5 +255,81 @@ public class FindDao {
             Pool.closeDBResource(rs,ps);
         }
         return count;
+    }
+
+    public static HashMap<String,ArrayList<QuestionBank>> getBank_generatePaperDao(Connection con,String sql,String thiscourse){
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        QuestionBank questionBank=null;
+        ArrayList<QuestionBank> banklist1=new ArrayList<QuestionBank>();
+        ArrayList<QuestionBank> banklist2=new ArrayList<QuestionBank>();
+        ArrayList<QuestionBank> banklist3=new ArrayList<QuestionBank>();
+        ArrayList<QuestionBank> banklist4=new ArrayList<QuestionBank>();
+        HashMap<String, ArrayList<QuestionBank>> map1= new HashMap<>();
+        try {
+            ps=con.prepareStatement(sql);
+            ps.setString(1,thiscourse);
+            rs=ps.executeQuery();
+            while (rs.next()){
+                long questionBank_serialNumber=rs.getLong("paperbase_serialNumber");
+                String questionBank_creatorID=rs.getString("questionBank_creatorID");
+                String questionBank_course=rs.getString("questionBank_course");
+                String questionBank_createDate=rs.getString("questionBank_createDate");
+                String questionBank_point=rs.getString("questionBank_point");
+                int questionBank_type=rs.getInt("questionBank_type");
+                String questionBank_title=rs.getString("questionBank_title");
+                String questionBank_titleimage=rs.getString("questionBank_titleimage");
+                String questionBank_option1=rs.getString("questionBank_option1");
+                String questionBank_option2=rs.getString("questionBank_option2");
+                String questionBank_option3=rs.getString("questionBank_option3");
+                String questionBank_option4=rs.getString("questionBank_option4");
+                String questionBank_answer=rs.getString("questionBank_answer");
+                questionBank=new QuestionBank(questionBank_serialNumber,questionBank_creatorID,questionBank_course,
+                        questionBank_createDate,questionBank_point,questionBank_type,questionBank_title,questionBank_titleimage,
+                        questionBank_option1,questionBank_option2,questionBank_option3,questionBank_option4,
+                        questionBank_answer);
+                switch (questionBank_type){
+                    case 1:
+                        banklist1.add(questionBank);
+                        break;
+                    case 2:
+                        banklist2.add(questionBank);
+                        break;
+                    case 3:
+                        banklist3.add(questionBank);
+                        break;
+                    case 4:
+                        banklist4.add(questionBank);
+                        break;
+                }
+            }
+            map1.put("danxuan",banklist1);
+            map1.put("duoxuan",banklist2);
+            map1.put("panduan",banklist3);
+            map1.put("jianda",banklist4);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            Pool.closeDBResource(rs,ps);
+        }
+        return map1;
+    }
+
+    public static void createType1PaperBaseDao(ArrayList<QuestionBank> want,String teacherid,
+                                            double score,String this_paperBaseuuid,String createTime,
+                                            String papername,String thiscourse,String sql,Connection con) {
+        PreparedStatement ps=null;
+        try{
+            ps=con.prepareStatement(sql);
+            for(int i=0;i<want.size();i++){
+                ps.setString(1,papername);
+                ps.setString(2,this_paperBaseuuid);
+                
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            Pool.close(ps);
+        }
     }
 }

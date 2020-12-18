@@ -29,7 +29,8 @@
 <body>
 <h2 style="text-align: center; color: grey;">创建试卷</h2>
 <h3 style="text-align: center;">科目：${course}</h3>
-<form class="form-inline" role="form" style="text-align: center;" id="newpaper" action="FinishPaperServlet" method="post">
+<form class="form-inline" role="form" style="text-align: center;" id="newpaper" action="GeneratePaperServlet" method="post">
+    <input type="hidden" name="thiscourse" value=${course}>
     <div class="form-group">
         <label class="sr-only" for="papername">试卷名字</label>
         试卷名字：<input type="text" class="form-control" id="papername" name="papername" style="width: 350px;" placeholder="请输入试卷名字" autocomplete="off">
@@ -125,7 +126,7 @@
         });
         $(".floatNum").blur(function () {
             if($(this).val()===""){
-                $(this).focus();
+                $(this).val("0");
             }
         });
         $("#score1").keyup(function () {

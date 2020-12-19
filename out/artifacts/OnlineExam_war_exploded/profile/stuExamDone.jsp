@@ -37,15 +37,23 @@
                     <span>
                         <img src="${pageContext.request.contextPath}/img/examlogo.png">
                         <h3>考试：${ExamAssignlist_class.examAssign_name}</h3>
+                                        <p>科目：
+                        <c:forEach var="newlesson_class" items="${requestScope.Newlessonlist_class}">
+                            <c:if test="${ExamAssignlist_class.lessonuuid eq newlesson_class.newlesson_uuid}">
+                                ${newlesson_class.newlesson_name}
+                            </c:if>
+                        </c:forEach>
+                        </p>
                                 <p>开始时间：${ExamAssignlist_class.startTime}</p>
                         <p>结束时间：${ExamAssignlist_class.endTime}</p>
                         <p>总分：${ExamAssignlist_class.totalscore}</p>
                         <b></b>
                         <font>
+                            <c:set var="iscontain" value="false" />
                             <c:forEach var="grade_class" items="${requestScope.gradelist}">
                                 <c:if test="${grade_class.examAssignuuid eq ExamAssignlist_class.examAssign_uuid}">
-
                                     <c:if test="${grade_class.total ne -1}">
+                                        <c:set var="iscontain" value="true" />
                                         <p style="color: red;">${grade_class.total}分</p>
                                         <a href="javascript:void(0)" rel="nofollow"
                                            onclick="window.location.href='GetStudentPaperServlet?examAssignuuid=${ExamAssignlist_class.examAssign_uuid}&studentID=${grade_class.studentID}&examname=${ExamAssignlist_class.examAssign_name}&totalscore=${ExamAssignlist_class.totalscore}&myscore=${grade_class.total}'"
@@ -55,12 +63,13 @@
                             </c:forEach>
                            <c:forEach var="grade_class" items="${requestScope.gradelist}">
                                <c:if test="${grade_class.examAssignuuid eq ExamAssignlist_class.examAssign_uuid}">
-
                                    <c:if test="${grade_class.total eq -1}">
+                                       <c:set var="iscontain" value="true" />
                                        <p style="color: red;">待批阅</p>
                                    </c:if>
                                </c:if>
                            </c:forEach>
+                            <c:if test="${!iscontain}"><p style="color: red;">未参加考试</p></c:if>
                         </font>
                     </span>
                 </li>
@@ -77,14 +86,23 @@
                     <span>
                         <img src="${pageContext.request.contextPath}/img/examlogo.png">
                         <h3>考试：${ExamAssignlist_other.examAssign_name}</h3>
+                                                   <p>科目：
+                        <c:forEach var="newlesson_other" items="${requestScope.Newlessonlist_other}">
+                            <c:if test="${ExamAssignlist_other.lessonuuid eq newlesson_other.newlesson_uuid}">
+                                ${newlesson_other.newlesson_name}
+                            </c:if>
+                        </c:forEach>
+                        </p>
                                 <p>开始时间：${ExamAssignlist_other.startTime}</p>
                         <p>结束时间：${ExamAssignlist_other.endTime}</p>
                         <p>总分：${ExamAssignlist_other.totalscore}</p>
                         <b></b>
                         <font>
+                            <c:set var="iscontain2" value="false" />
                                                         <c:forEach var="grade_other" items="${requestScope.gradelist}">
                                                             <c:if test="${grade_other.examAssignuuid eq ExamAssignlist_other.examAssign_uuid}">
                                                                 <c:if test="${grade_other.total ne -1}">
+                                                                    <c:set var="iscontain2" value="true" />
                                                                     <p style="color: red;">${grade_other.total}分</p>
                                                                     <a href="javascript:void(0)" rel="nofollow"
                                                                        onclick="window.location.href='GetStudentPaperServlet?examAssignuuid=${ExamAssignlist_other.examAssign_uuid}&studentID=${grade_other.studentID}&examname=${ExamAssignlist_other.examAssign_name}&totalscore=${ExamAssignlist_other.totalscore}&myscore=${grade_other.total}'"
@@ -96,10 +114,12 @@
                                                                             items="${requestScope.gradelist}">
                                                                      <c:if test="${grade_other.examAssignuuid eq ExamAssignlist_other.examAssign_uuid}">
                                                                          <c:if test="${grade_other.total eq -1}">
+                                                                             <c:set var="iscontain2" value="true" />
                                                                              <p style="color: red;">待批阅</p>
                                                                          </c:if>
                                                                      </c:if>
                                                                  </c:forEach>
+                            <c:if test="${!iscontain2}"><p style="color: red;">未参加考试</p></c:if>
                         </font>
                     </span>
                 </li>

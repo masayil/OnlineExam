@@ -1,9 +1,14 @@
 package com.service.teacher;
 
 import com.bean.entity.*;
+import com.dao.teacher.CreateDao;
 import com.dao.teacher.FindDao;
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -86,5 +91,43 @@ public class FindService {
     public static ArrayList<PaperBase> prepareExamService(Connection con,String course){
         String sql="select distinct paperbase_name,paperbase_uuid from paperbase where course=?";
         return FindDao.prepareExamDao(con,course,sql);
+    }
+
+    public static ArrayList<Newlesson> getnewlessonTService(Connection con, String t_id){
+        String sql="select * from newlesson where newlesson_creatorID=? order by newlesson_createDate desc";
+        return CreateDao.getnewlessonTDao(con,t_id,sql);
+    }
+
+
+    public static HashMap<String, ArrayList<ExamAssign>> getExamAssign_listService(Connection con, ArrayList<Newlesson> newlessons_list, String gettime)  {
+        String [] newlessonuuid = new String[newlessons_list.size()];
+        for(int i=0;i<newlessons_list.size();i++){
+            Newlesson newlesson=newlessons_list.get(i);
+            newlessonuuid[i]=newlesson.getNewlesson_uuid();
+        }
+        String sql="select * from examAssign where lessonuuid=? order by examAssign_createDate desc";
+        ArrayList<ExamAssign> examAssigns;
+        ArrayList<ExamAssign> examAssign_before=new ArrayList<>();
+        ArrayList<ExamAssign> examAssign_ing=new ArrayList<>();
+        try{
+            examAssigns=CreateDao.getTExamAssignlistDao(newlessonuuid,sql,con);
+            for (int i=0;i<examAssigns.size();i++){
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                Date d1 = df.parse(examAssigns.get(i).getStartTime());
+                Date d2 = df.parse(examAssigns.get(i).getEndTime());
+                Date d3 = df.parse(gettime);
+                if (d3.getTime() < d1.getTime()){
+                    examAssign_before.add(examAssigns.get(i));
+                }else if(d3.getTime() < d2.getTime()){
+                    examAssign_ing.add(examAssigns.get(i));
+                }
+            }
+        } catch (SQLException | ParseException throwables) {
+            throwables.printStackTrace();
+        }
+        HashMap<String, ArrayList<ExamAssign>> map=new HashMap<>();
+        map.put("before",examAssign_before);
+        map.put("ing",examAssign_ing);
+        return map;
     }
 }

@@ -75,15 +75,15 @@
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="javascript:void(0)" onclick="window.maincontent.location.href='StuExamServlet?method=ing'">
-                            <cite>进行中的考试</cite></a>
+                        <a href="javascript:void(0)" onclick="window.maincontent.location.href='CheckExamT?type=released'">
+                            <cite>已发布的考试</cite></a>
                     </li>
                     <li>
-                        <a href="javascript:void(0)" onclick="window.maincontent.location.href='StuExamServlet?method=done'">
+                        <a href="javascript:void(0)" onclick="window.maincontent.location.href='CheckExamT?type=approve'">
                             <cite>待批阅的考试</cite></a>
                     </li>
                     <li>
-                        <a href="javascript:void(0)" onclick="window.maincontent.location.href='StuExamServlet?method=done'">
+                        <a href="javascript:void(0)" onclick="window.maincontent.location.href='CheckExamT?type=done'">
                             <cite>已完成的考试</cite></a>
                     </li>
                 </ul>

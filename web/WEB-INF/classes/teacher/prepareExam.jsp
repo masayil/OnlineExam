@@ -39,7 +39,7 @@
 
 <body>
 <div class="father">
-<form action="" method="post">
+<form action="CreateExamServlet" method="post">
     <input type="hidden" name="lessonuuid" value=${lessonuuid}>
     考试名称：<input type="text" name="examname" autocomplete="off"><br>
     班&emsp;&emsp;级：<input type="text" name="thisclass" readonly style="border: none;outline: none;" value=${thisclass}><br>

@@ -1,6 +1,7 @@
 package com.service.teacher;
 
 import com.bean.entity.QuestionBank;
+import com.dao.teacher.CreateDao;
 import com.dao.teacher.FindDao;
 import com.myutil.Generatetime;
 import com.myutil.Generateuuid;
@@ -85,7 +86,13 @@ public class CreateService {
         FindDao.createPaperBaseDao(want,teacherid,score1,this_paperBaseuuid,createTime,papername,thiscourse,
                 sql,con);
     }
-    public static boolean CreateExam(){
-        return true;
+    public static boolean CreateExamService(Connection con,String lessonuuid,String paperuuid,String starttime,
+                                     String endtime,int lasttime,String examname){
+        String examAssign_uuid=Generateuuid.getuuid();
+        String examAssign_createDate=Generatetime.gettime();
+        double totalscore=100;
+        String sql="insert into examAssign values (?,?,?,?,?,?,?,?,?)";
+        return CreateDao.CreateExamDao(con,lessonuuid,paperuuid,starttime,endtime,lasttime,examname,
+                examAssign_uuid,examAssign_createDate,totalscore,sql);
     }
 }

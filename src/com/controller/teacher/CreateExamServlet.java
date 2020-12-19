@@ -29,12 +29,17 @@ public class CreateExamServlet extends HttpServlet {
         }else {
             String lessonuuid=request.getParameter("lessonuuid");
             String paperuuid=request.getParameter("paperuuid");
-            String datetimepicker1=request.getParameter("datetimepicker1");
-            String datetimepicker2=request.getParameter("datetimepicker2");
+            String starttime=request.getParameter("datetimepicker1");
+            String endtime=request.getParameter("datetimepicker2");
             int lasttime=Integer.parseInt(request.getParameter("lasttime"));
             String examname=request.getParameter("examname");
-            boolean isCreate= CreateService.CreateExam();
-
+            boolean isCreate= CreateService.CreateExamService(con,lessonuuid,paperuuid,starttime,endtime,lasttime,examname);
+            dbpool.close(con);
+            if(isCreate){
+                out.print("<script language='javascript'>alert('考试发布成功!');window.location.href='FirstLoad?status=teacher';</script>");
+            }else {
+                out.print("<script language='javascript'>alert('失败!请再试一次！');window.history.go(-1);</script>");
+            }
         }
     }
 

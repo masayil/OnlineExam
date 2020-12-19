@@ -32,7 +32,7 @@ public class ExamIngDao {
                 String examAssign_createDate = rs.getString("examAssign_createDate");
                 String paperbaseuuid = rs.getString("paperbaseuuid");
                 String examAssign_name = rs.getString("examAssign_name");
-                Double totalscore = rs.getDouble("totalscore");
+                double totalscore = rs.getDouble("totalscore");
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                 Date d1 = df.parse(startTime);
                 Date d2 = df.parse(endTime);

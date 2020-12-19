@@ -65,6 +65,8 @@ public class StuExamServlet extends HttpServlet {
                 dbpool.close(con);
                 request.setAttribute("ExamAssignlist_class", ExamAssignlist_class);
                 request.setAttribute("ExamAssignlist_other", ExamAssignlist_other);
+                request.setAttribute("Newlessonlist_class", Newlessonlist_class);
+                request.setAttribute("Newlessonlist_other", Newlessonlist_other);
                 request.getRequestDispatcher("./profile/stuExamIng.jsp").forward(request, response);
             } else {
                 try {
@@ -85,6 +87,8 @@ public class StuExamServlet extends HttpServlet {
                 dbpool.close(con);
                 request.setAttribute("ExamAssignlist_class", ExamAssignlist_class);
                 request.setAttribute("ExamAssignlist_other", ExamAssignlist_other);
+                request.setAttribute("Newlessonlist_other", Newlessonlist_other);
+                request.setAttribute("Newlessonlist_class", Newlessonlist_class);
                 request.setAttribute("gradelist", gradelist);
                 request.getRequestDispatcher("./profile/stuExamDone.jsp").forward(request, response);
             }

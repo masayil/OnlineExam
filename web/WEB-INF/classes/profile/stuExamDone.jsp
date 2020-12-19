@@ -37,6 +37,13 @@
                     <span>
                         <img src="${pageContext.request.contextPath}/img/examlogo.png">
                         <h3>考试：${ExamAssignlist_class.examAssign_name}</h3>
+                                        <p>科目：
+                        <c:forEach var="newlesson_class" items="${requestScope.Newlessonlist_class}">
+                            <c:if test="${ExamAssignlist_class.lessonuuid eq newlesson_class.newlesson_uuid}">
+                                ${newlesson_class.newlesson_name}
+                            </c:if>
+                        </c:forEach>
+                        </p>
                                 <p>开始时间：${ExamAssignlist_class.startTime}</p>
                         <p>结束时间：${ExamAssignlist_class.endTime}</p>
                         <p>总分：${ExamAssignlist_class.totalscore}</p>
@@ -77,6 +84,13 @@
                     <span>
                         <img src="${pageContext.request.contextPath}/img/examlogo.png">
                         <h3>考试：${ExamAssignlist_other.examAssign_name}</h3>
+                                                   <p>科目：
+                        <c:forEach var="newlesson_other" items="${requestScope.Newlessonlist_other}">
+                            <c:if test="${ExamAssignlist_other.lessonuuid eq newlesson_other.newlesson_uuid}">
+                                ${newlesson_other.newlesson_name}
+                            </c:if>
+                        </c:forEach>
+                        </p>
                                 <p>开始时间：${ExamAssignlist_other.startTime}</p>
                         <p>结束时间：${ExamAssignlist_other.endTime}</p>
                         <p>总分：${ExamAssignlist_other.totalscore}</p>

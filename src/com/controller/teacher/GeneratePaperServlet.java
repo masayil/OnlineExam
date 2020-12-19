@@ -17,7 +17,7 @@ import java.sql.Connection;
 
 @WebServlet(name = "GeneratePaperServlet",urlPatterns = {"/GeneratePaperServlet"})
 public class GeneratePaperServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
         HttpSession session = request.getSession();
@@ -41,6 +41,10 @@ public class GeneratePaperServlet extends HttpServlet {
             String thiscourse=request.getParameter("thiscourse");
             boolean isGenerate= CreateService.generatePaperBaseService(con,teacher.getT_id(),danxuan,duoxuan,panduan,
                     jianda,score1,score2,score3,score4,thiscourse,papername);
+            dbpool.close(con);
+            if(isGenerate){
+                response.sendRedirect("FindPaperBaseServlet");
+            }
         }
     }
 }

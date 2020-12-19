@@ -65,7 +65,7 @@
                         <b></b>
                         <font>
                             <a href="javascript:void(0)" onclick="window.location.href='readMemberServlet?lessonuuid=${teacherlesson.newlesson_uuid}&stuclass=${teacherlesson.newlesson_class}'"  style="text-decoration:none">成员详情</a>
-                            <a href="javascript:void(0)" onclick="window.location.href='StuExamServlet?method=ing'"  style="text-decoration:none">发布考试</a>
+                            <a href="javascript:void(0)" onclick="window.location.href='PrepareExamServlet?lessonuuid=${teacherlesson.newlesson_uuid}&course=${teacherlesson.newlesson_name}&thisclass=${teacherlesson.newlesson_class}'"  style="text-decoration:none">发布考试</a>
                         </font>
                         <font>
                             <a href="javascript:void(0)" onclick="window.location.href='DeletelessonServlet?lessonuuid=${teacherlesson.newlesson_uuid}'"  style="text-decoration:none;margin-left: 75px;">撤销课程</a>

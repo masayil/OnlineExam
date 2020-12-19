@@ -83,4 +83,8 @@ public class FindService {
         map.put("简答题",type4);
         return map;
     }
+    public static ArrayList<PaperBase> prepareExamService(Connection con,String course){
+        String sql="select distinct paperbase_name,paperbase_uuid from paperbase where course=?";
+        return FindDao.prepareExamDao(con,course,sql);
+    }
 }

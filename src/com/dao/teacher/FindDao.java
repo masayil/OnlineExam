@@ -271,7 +271,7 @@ public class FindDao {
             ps.setString(1,thiscourse);
             rs=ps.executeQuery();
             while (rs.next()){
-                long questionBank_serialNumber=rs.getLong("paperbase_serialNumber");
+                long questionBank_serialNumber=rs.getLong("questionBank_serialNumber");
                 String questionBank_creatorID=rs.getString("questionBank_creatorID");
                 String questionBank_course=rs.getString("questionBank_course");
                 String questionBank_createDate=rs.getString("questionBank_createDate");
@@ -315,7 +315,7 @@ public class FindDao {
         return map1;
     }
 
-    public static void createType1PaperBaseDao(ArrayList<QuestionBank> want,String teacherid,
+    public static void createPaperBaseDao(ArrayList<QuestionBank> want,String teacherid,
                                             double score,String this_paperBaseuuid,String createTime,
                                             String papername,String thiscourse,String sql,Connection con) {
         PreparedStatement ps=null;
@@ -324,12 +324,50 @@ public class FindDao {
             for(int i=0;i<want.size();i++){
                 ps.setString(1,papername);
                 ps.setString(2,this_paperBaseuuid);
-                
+                ps.setString(3,teacherid);
+                ps.setString(4,createTime);
+                ps.setString(5,thiscourse);
+                ps.setInt(6,want.get(i).getQuestionBank_type());
+                ps.setString(7,want.get(i).getQuestionBank_title());
+                ps.setString(8,want.get(i).getQuestionBank_titleimage());
+                ps.setString(9,want.get(i).getQuestionBank_option1());
+                ps.setString(10,want.get(i).getQuestionBank_option2());
+                ps.setString(11,want.get(i).getQuestionBank_option3());
+                ps.setString(12,want.get(i).getQuestionBank_option4());
+                ps.setString(13,want.get(i).getQuestionBank_answer());
+                ps.setDouble(14,score);
+                ps.addBatch();
             }
+            ps.executeBatch();
         }catch (SQLException e){
             e.printStackTrace();
         }finally {
             Pool.close(ps);
         }
+    }
+
+    public static ArrayList<PaperBase> prepareExamDao(Connection con,String thiscourse,String sql){
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        PaperBase paperBase=new PaperBase();
+        ArrayList<PaperBase> paperBaseArrayList=new ArrayList<PaperBase>();
+        try{
+            ps=con.prepareStatement(sql);
+            ps.setString(1,thiscourse);
+            rs=ps.executeQuery();
+            while (rs.next()){
+                String paperbase_name=rs.getString("paperbase_name");
+                String paperbase_uuid=rs.getString("paperbase_uuid");
+                if(paperbase_name!=null&&paperbase_uuid!=null){
+                paperBase.setPaperbase_name(paperbase_name);
+                paperBase.setPaperbase_uuid(paperbase_uuid);
+                paperBaseArrayList.add(paperBase);}
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            Pool.closeDBResource(rs,ps);
+        }
+        return paperBaseArrayList;
     }
 }

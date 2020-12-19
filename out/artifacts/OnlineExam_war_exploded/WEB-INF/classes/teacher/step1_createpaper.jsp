@@ -29,7 +29,7 @@
 <body>
 <h2 style="text-align: center; color: grey;">创建试卷</h2>
 <h3 style="text-align: center;">科目：${course}</h3>
-<form class="form-inline" role="form" style="text-align: center;" id="newpaper" action="GeneratePaperServlet" method="post">
+<form class="form-inline" role="form" style="text-align: center;" id="newpaper" action="GeneratePaperServlet" method="get">
     <input type="hidden" name="thiscourse" value=${course}>
     <div class="form-group">
         <label class="sr-only" for="papername">试卷名字</label>
@@ -52,7 +52,7 @@
     &emsp;&emsp;&emsp;&emsp;&emsp;
     <div class="form-group">
         <label class="sr-only" for="score1">分数</label>
-        分数：<input type="text" class="form-control floatNum" id="score1" name="score1" placeholder="请输入单选题分数" value="0" autocomplete="off">
+        分数：<input type="number" class="form-control floatNum" id="score1" name="score1" placeholder="请输入单选题分数" value="0" autocomplete="off">
     </div>
     <br>
     <div class="form-group">
@@ -71,7 +71,7 @@
     &emsp;&emsp;&emsp;&emsp;&emsp;
     <div class="form-group">
         <label class="sr-only" for="score2">分数</label>
-        分数：<input type="text" class="form-control floatNum" id="score2" name="score2" placeholder="请输入多选题分数" value="0" autocomplete="off">
+        分数：<input type="number" class="form-control floatNum" id="score2" name="score2" placeholder="请输入多选题分数" value="0" autocomplete="off">
     </div>
     <br>
     <div class="form-group">
@@ -90,7 +90,7 @@
     &emsp;&emsp;&emsp;&emsp;&emsp;
     <div class="form-group">
         <label class="sr-only" for="score3">分数</label>
-        分数：<input type="text" class="form-control floatNum" id="score3" name="score3" placeholder="请输入判断题分数" value="0" autocomplete="off">
+        分数：<input type="number" class="form-control floatNum" id="score3" name="score3" placeholder="请输入判断题分数" value="0" autocomplete="off">
     </div>
     <br>
     <div class="form-group">
@@ -109,7 +109,7 @@
     &emsp;&emsp;&emsp;&emsp;&emsp;
     <div class="form-group">
         <label class="sr-only" for="score4">分数</label>
-        分数：<input type="text" class="form-control floatNum" id="score4" name="score4" placeholder="请输入简答题分数" value="0" autocomplete="off">
+        分数：<input type="number" class="form-control floatNum" id="score4" name="score4" placeholder="请输入简答题分数" value="0" autocomplete="off">
     </div>
     <br>
     <br>
@@ -129,7 +129,7 @@
                 $(this).val("0");
             }
         });
-        $("#score1").keyup(function () {
+        $("#score1").change(function () {
             var a=$("#danxuan").val();
             var b=$("#score1").val();
             if(b===""){
@@ -140,7 +140,7 @@
             d=d+c;
             document.getElementById("totalscore").value=d;
         });
-        $("#score2").keyup(function () {
+        $("#score2").change(function () {
             var a=$("#duoxuan").val();
             var b=$("#score2").val();
             if(b===""){
@@ -151,7 +151,7 @@
             d=d+c;
             document.getElementById("totalscore").value=d;
         });
-        $("#score3").keyup(function () {
+        $("#score3").change(function () {
             var a=$("#panduan").val();
             var b=$("#score3").val();
             if(b===""){
@@ -162,7 +162,7 @@
             d=d+c;
             document.getElementById("totalscore").value=d;
         });
-        $("#score4").keyup(function () {
+        $("#score4").change(function () {
             var a=$("#jianda").val();
             var b=$("#score4").val();
             if(b===""){

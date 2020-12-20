@@ -38,10 +38,11 @@ public class CheckExamT extends HttpServlet {
             ArrayList<Newlesson> newlessons_list= FindService.getnewlessonTService(con,teacher.getT_id());
             ArrayList<ExamAssign> ExamAssignlist_before;
             ArrayList<ExamAssign> ExamAssignlist_ing;
+            ArrayList<ExamAssign> ExamAssignlist_normal;
             HashMap <String,ArrayList<ExamAssign>> map;
             switch (type){
                 case "released":
-                    map=FindService.getExamAssign_listService(con,newlessons_list, Generatetime.gettime());
+                    map=FindService.getExamAssign_list1Service(con,newlessons_list, Generatetime.gettime());
                     dbpool.close(con);
                     ExamAssignlist_before=map.get("before");
                     ExamAssignlist_ing=map.get("ing");
@@ -51,7 +52,10 @@ public class CheckExamT extends HttpServlet {
                     request.getRequestDispatcher("./teacher/teaReleased.jsp").forward(request, response);
                     break;
                 case "approve":
-                    int i=1;
+                    ExamAssignlist_normal=FindService.getExamAssign_list2Service(con,newlessons_list,Generatetime.gettime());
+                    request.setAttribute("ExamAssignlist_normal", ExamAssignlist_normal);
+                    request.setAttribute("newlessons_list", newlessons_list);
+                    request.getRequestDispatcher("./teacher/teaApprove.jsp").forward(request, response);
                     break;
                 case "done":
                     String s="11";

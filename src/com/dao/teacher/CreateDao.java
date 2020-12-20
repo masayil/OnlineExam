@@ -114,4 +114,27 @@ public class CreateDao {
         }
         return false;
     }
+
+    public static ArrayList<String> getTExamNormalDao(String[] examuuid, String sql, Connection con) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ArrayList<String> examuuidlist=new ArrayList<>();
+        String uuid= "";
+        try{
+            for(int i=0;i<examuuid.length;i++){
+                ps = con.prepareStatement(sql);
+                ps.setString(1,examuuid[i]);
+                rs = ps.executeQuery();
+                while (rs.next()){
+                    uuid=rs.getString("examAssignuuid");
+                    examuuidlist.add(uuid);
+                }
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            Pool.closeDBResource(rs,ps);
+        }
+        return examuuidlist;
+    }
 }

@@ -472,11 +472,11 @@
             }
         }
         for(var i4=1;i4<=${size4};i4++){
-                var fileTypes = [".jpg"];
+                var fileTypes = ".jpg";
                 var filePath= document.getElementById("4_answer_4_option_1_"+i4).value;
                 var fileEnd = filePath.substring(filePath.indexOf("."));
                 if (fileTypes !== fileEnd) {
-                    alert("简答题图片格式为jpg");
+                    alert("简答题图片格式为jpg"+fileEnd+" filepath"+filePath);
                     return false;
                 }
             }

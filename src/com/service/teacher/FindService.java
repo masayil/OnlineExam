@@ -99,7 +99,7 @@ public class FindService {
     }
 
 
-    public static HashMap<String, ArrayList<ExamAssign>> getExamAssign_listService(Connection con, ArrayList<Newlesson> newlessons_list, String gettime)  {
+    public static HashMap<String, ArrayList<ExamAssign>> getExamAssign_list1Service(Connection con, ArrayList<Newlesson> newlessons_list, String gettime)  {
         String [] newlessonuuid = new String[newlessons_list.size()];
         for(int i=0;i<newlessons_list.size();i++){
             Newlesson newlesson=newlessons_list.get(i);
@@ -129,5 +129,47 @@ public class FindService {
         map.put("before",examAssign_before);
         map.put("ing",examAssign_ing);
         return map;
+    }
+
+    public static ArrayList<ExamAssign> getExamAssign_list2Service(Connection con, ArrayList<Newlesson> newlessons_list, String gettime)  {
+        String [] newlessonuuid = new String[newlessons_list.size()];
+        for(int i=0;i<newlessons_list.size();i++){
+            Newlesson newlesson=newlessons_list.get(i);
+            newlessonuuid[i]=newlesson.getNewlesson_uuid();
+        }
+        String sql="select * from examAssign where lessonuuid=? order by examAssign_createDate desc";
+        String sql2="select distinct examAssignuuid from grade where examAssignuuid=? and total=-1";
+        ArrayList<String> result;
+        ArrayList<ExamAssign> examAssigns;
+        ArrayList<ExamAssign> examAssign_next=new ArrayList<>();
+        ArrayList<ExamAssign> examAssign_normal=new ArrayList<>();
+        try{
+            examAssigns=CreateDao.getTExamAssignlistDao(newlessonuuid,sql,con);
+            for (int i=0;i<examAssigns.size();i++){
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                Date d1 = df.parse(examAssigns.get(i).getStartTime());
+                Date d2 = df.parse(examAssigns.get(i).getEndTime());
+                Date d3 = df.parse(gettime);
+                if (d3.getTime() >= d2.getTime()){
+                    examAssign_next.add(examAssigns.get(i));
+                }
+            }
+            String [] examuuid=new String[examAssign_next.size()];
+            for(int i=0;i<examAssign_next.size();i++){
+                ExamAssign examAssign=examAssign_next.get(i);
+                examuuid[i]=examAssign.getExamAssign_uuid();
+            }
+            result=CreateDao.getTExamNormalDao(examuuid,sql2,con);
+            for(int i=0;i<result.size();i++){
+                for(int j=0;j<examAssign_next.size();j++){
+                    if(result.get(i).equals(examAssign_next.get(j).getExamAssign_uuid())){
+                        examAssign_normal.add(examAssign_next.get(j));
+                    }
+                }
+            }
+        } catch (SQLException | ParseException throwables) {
+            throwables.printStackTrace();
+        }
+        return examAssign_normal;
     }
 }

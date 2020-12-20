@@ -27,57 +27,30 @@
 <jsp:useBean id="teacher" type="com.bean.entity.Teacher" scope="session"></jsp:useBean>
 <div class="meal-box">
     <div class="meal-title">
-        <h1>已发布的考试</h1>
+        <h1>待批阅的考试</h1>
     </div>
-    <div style="margin-left: 30px;"><h3>尚未开始：</h3></div>
     <div class="meal-cut">
         <ul>
-            <c:forEach var="ExamAssignlist_before" items="${requestScope.ExamAssignlist_before}">
+            <c:forEach var="ExamAssignlist_normal" items="${requestScope.ExamAssignlist_normal}">
                 <li>
                     <span>
                         <img src="${pageContext.request.contextPath}/img/examlogo.png">
-                        <h3>考试：${ExamAssignlist_before.examAssign_name}</h3>
+                        <h3>考试：${ExamAssignlist_normal.examAssign_name}</h3>
                         <p>科目：
                         <c:forEach var="newlessons_list" items="${requestScope.newlessons_list}">
-                            <c:if test="${ExamAssignlist_before.lessonuuid eq newlessons_list.newlesson_uuid}">
+                            <c:if test="${ExamAssignlist_normal.lessonuuid eq newlessons_list.newlesson_uuid}">
                                 ${newlessons_list.newlesson_name}
                             </c:if>
                         </c:forEach>
                         </p>
-                                <p>开始时间：${ExamAssignlist_before.startTime}</p>
-                        <p>结束时间：${ExamAssignlist_before.endTime}</p>
-                        <p>总分：${ExamAssignlist_before.totalscore}</p>
+                                <p>开始时间：${ExamAssignlist_normal.startTime}</p>
+                        <p>结束时间：${ExamAssignlist_normal.endTime}</p>
+                        <p>总分：${ExamAssignlist_normal.totalscore}</p>
                         <b></b>
                         <font>
-                            <a href="javascript:void(0)" onclick="deleteexam('${ExamAssignlist_before.examAssign_uuid}')" style="text-decoration:none;margin-left: 80px;">撤销考试</a>
+                            <a href="javascript:void(0)" onclick="" style="text-decoration:none;margin-left: 80px;">批阅试卷</a>
 
                         </font>
-                    </span>
-                </li>
-            </c:forEach>
-        </ul>
-
-    </div>
-    <hr style="height:1px;border:none;border-top:1px dashed #0066CC;">
-    <div style="margin-left: 30px;"><h3>进行中的：</h3></div>
-    <div class="meal-cut">
-        <ul>
-            <c:forEach var="ExamAssignlist_ing" items="${requestScope.ExamAssignlist_ing}">
-                <li>
-                    <span>
-                        <img src="${pageContext.request.contextPath}/img/examlogo.png">
-                        <h3>考试：${ExamAssignlist_ing.examAssign_name}</h3>
-                                        <p>科目：
-                        <c:forEach var="newlessons_list" items="${requestScope.newlessons_list}">
-                            <c:if test="${ExamAssignlist_ing.lessonuuid eq newlessons_list.newlesson_uuid}">
-                                ${newlessons_list.newlesson_name}
-                            </c:if>
-                        </c:forEach>
-                        </p>
-                                <p>开始时间：${ExamAssignlist_ing.startTime}</p>
-                        <p>结束时间：${ExamAssignlist_ing.endTime}</p>
-                        <p>总分：${ExamAssignlist_ing.totalscore}</p>
-                        <b></b>
                     </span>
                 </li>
             </c:forEach>

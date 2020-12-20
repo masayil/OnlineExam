@@ -95,4 +95,9 @@ public class CreateService {
         return CreateDao.CreateExamDao(con,lessonuuid,paperuuid,starttime,endtime,lasttime,examname,
                 examAssign_uuid,examAssign_createDate,totalscore,sql);
     }
+
+    public static boolean deleteExamTService(Connection con,String examuuid){
+        String sql="delete from examAssign where examAssign_uuid=?";
+        return CreateDao.deleteExamTDao(con,examuuid,sql);
+    }
 }

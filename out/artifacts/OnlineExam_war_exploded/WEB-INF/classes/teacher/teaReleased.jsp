@@ -49,7 +49,7 @@
                         <p>总分：${ExamAssignlist_before.totalscore}</p>
                         <b></b>
                         <font>
-                            <a href="javascript:void(0)" onclick="" style="text-decoration:none;margin-left: 80px;">撤销考试</a>
+                            <a href="javascript:void(0)" onclick="deleteexam('${ExamAssignlist_before.examAssign_uuid}')" style="text-decoration:none;margin-left: 80px;">撤销考试</a>
 
                         </font>
                     </span>
@@ -88,5 +88,12 @@
 </div>
 <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/syalert/syalert.min.js"></script>
+<script>
+    function deleteexam(examuuid) {
+        if(confirm("是否确认撤销？")){
+            window.location.href="DeleteExam?examuuid="+examuuid;
+        }
+    }
+</script>
 </body>
 </html>

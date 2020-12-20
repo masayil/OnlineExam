@@ -97,4 +97,21 @@ public class CreateDao {
         }
         return ExamAssignlist;
     }
+
+    public static boolean deleteExamTDao(Connection con,String examuuid,String sql){
+        PreparedStatement ps = null;
+        try{
+            ps=con.prepareStatement(sql);
+            ps.setString(1,examuuid);
+            int i=ps.executeUpdate();
+            if(i==1){
+                return true;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            Pool.close(ps);
+        }
+        return false;
+    }
 }

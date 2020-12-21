@@ -27,7 +27,7 @@ questiontype int NOT NULL,                 题目类型
 @AllArgsConstructor
 @NoArgsConstructor
 public class Paper {
-    private Long paper_serialNumber;
+    private long paper_serialNumber;
     private String studentID;
     private String examAssignuuid;
     private int questiontype;

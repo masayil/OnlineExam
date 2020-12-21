@@ -1,6 +1,8 @@
 package com.service.teacher;
 
+import com.bean.entity.Paper;
 import com.bean.entity.QuestionBank;
+import com.bean.entity.Student;
 import com.dao.teacher.CreateDao;
 import com.dao.teacher.FindDao;
 import com.myutil.Generatetime;
@@ -99,5 +101,34 @@ public class CreateService {
     public static boolean deleteExamTService(Connection con,String examuuid){
         String sql="delete from examAssign where examAssign_uuid=?";
         return CreateDao.deleteExamTDao(con,examuuid,sql);
+    }
+
+    public static ArrayList<Student> getStudentIDService(Connection con, String examuuid) {
+        String sql="select * from student where s_id in (select studentID from grade where examAssignuuid=? and total=-1)";
+        return CreateDao.getStudentIDDao(con,examuuid,sql);
+    }
+
+    public static ArrayList<Paper> markStuPapersService(Connection con, String examuuid, String studentid) {
+        String sql="select * from paper where studentID=? and examAssignuuid=? and questiontype=4";
+        return CreateDao.markPapersDao(con,examuuid,studentid,sql);
+    }
+
+    public static void updatePaperService(Connection con, String[] myscore, String[] order) {
+        String sql="update paper set paper_option4=? where paper_serialNumber=?";
+        for(int i=0;i<order.length;i++){
+            CreateDao.updatePaperDao(con,myscore[i],order[i],sql);
+        }
+    }
+
+    public static void updateGradeService(Connection con, String[] myscore, String examuuid, String studentid) {
+        double subject=0;
+        for(int i=0;i<myscore.length;i++){
+            double fenshu=Double.parseDouble(myscore[i]);
+            subject+=fenshu;
+        }
+        String sql1="select objectivequestion from grade where studentID=? and examAssignuuid=?";
+        String sql2="update grade set subjectivequestion=? where studentID=? and examAssignuuid=?";
+        String sql3="update grade set total=? where studentID=? and examAssignuuid=?";
+        CreateDao.updateGradeDao(con,examuuid,studentid,subject,sql1,sql2,sql3);
     }
 }

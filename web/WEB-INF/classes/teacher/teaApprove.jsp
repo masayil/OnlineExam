@@ -43,12 +43,19 @@
                             </c:if>
                         </c:forEach>
                         </p>
+                        <p>班级：
+                               <c:forEach var="newlessons_list" items="${requestScope.newlessons_list}">
+                                   <c:if test="${ExamAssignlist_normal.lessonuuid eq newlessons_list.newlesson_uuid}">
+                                       ${newlessons_list.newlesson_class}
+                                   </c:if>
+                               </c:forEach>
+                        </p>
                                 <p>开始时间：${ExamAssignlist_normal.startTime}</p>
                         <p>结束时间：${ExamAssignlist_normal.endTime}</p>
                         <p>总分：${ExamAssignlist_normal.totalscore}</p>
                         <b></b>
                         <font>
-                            <a href="javascript:void(0)" onclick="" style="text-decoration:none;margin-left: 80px;">批阅试卷</a>
+                            <a href="javascript:void(0)" onclick="window.location.href='GetExamPaperList?examuuid=${ExamAssignlist_normal.examAssign_uuid}&examname=${ExamAssignlist_normal.examAssign_name}'" style="text-decoration:none;margin-left: 80px;">批阅试卷</a>
 
                         </font>
                     </span>
@@ -61,12 +68,5 @@
 </div>
 <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/syalert/syalert.min.js"></script>
-<script>
-    function deleteexam(examuuid) {
-        if(confirm("是否确认撤销？")){
-            window.location.href="DeleteExam?examuuid="+examuuid;
-        }
-    }
-</script>
 </body>
 </html>

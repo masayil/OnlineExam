@@ -222,9 +222,10 @@ public class FindDao {
 
     public static boolean deleteBankDao(Connection con,String serialNumber,String sql){
         PreparedStatement ps = null;
+        long s=Long.parseLong(serialNumber);
         try{
             ps=con.prepareStatement(sql);
-            ps.setString(1,serialNumber);
+            ps.setLong(1,s);
             int i=ps.executeUpdate();
             if(i==1){
                 return true;

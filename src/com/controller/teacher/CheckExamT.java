@@ -53,6 +53,7 @@ public class CheckExamT extends HttpServlet {
                     break;
                 case "approve":
                     ExamAssignlist_normal=FindService.getExamAssign_list2Service(con,newlessons_list,Generatetime.gettime());
+                    dbpool.close(con);
                     request.setAttribute("ExamAssignlist_normal", ExamAssignlist_normal);
                     request.setAttribute("newlessons_list", newlessons_list);
                     request.getRequestDispatcher("./teacher/teaApprove.jsp").forward(request, response);

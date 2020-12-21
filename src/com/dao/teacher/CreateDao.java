@@ -2,6 +2,8 @@ package com.dao.teacher;
 
 import com.bean.entity.ExamAssign;
 import com.bean.entity.Newlesson;
+import com.bean.entity.Paper;
+import com.bean.entity.Student;
 import com.myutil.Pool;
 
 import java.sql.Connection;
@@ -53,8 +55,10 @@ public class CreateDao {
             while (rs.next()){
                 String newlesson_uuid=rs.getString("newlesson_uuid");
                 String newlesson_name=rs.getString("newlesson_name");
+                String newlesson_class=rs.getString("newlesson_class");
                 newlesson.setNewlesson_uuid(newlesson_uuid);
                 newlesson.setNewlesson_name(newlesson_name);
+                newlesson.setNewlesson_class(newlesson_class);
                 newlessonArrayList.add(newlesson);
             }
         }catch (SQLException e){
@@ -136,5 +140,116 @@ public class CreateDao {
             Pool.closeDBResource(rs,ps);
         }
         return examuuidlist;
+    }
+
+    public static ArrayList<Student> getStudentIDDao(Connection con, String examuuid, String sql) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Student student=null;
+        ArrayList<Student> studentIDlist=new ArrayList<>();
+        try{
+            ps=con.prepareStatement(sql);
+            ps.setString(1,examuuid);
+            rs=ps.executeQuery();
+            while (rs.next()){
+                long s_serialNumber=rs.getLong("s_serialNumber");
+                String s_id=rs.getString("s_id");
+                String s_name=rs.getString("s_name");
+                String s_password=rs.getString("s_password");
+                String s_sex=rs.getString("s_sex");
+                String s_college=rs.getString("s_college");
+                String s_department=rs.getString("s_department");
+                String s_class=rs.getString("s_class");
+                String s_major=rs.getString("s_major");
+                student=new Student(s_serialNumber,s_id,s_name,s_password,s_sex,s_college,s_department,s_class,s_major);
+                studentIDlist.add(student);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            Pool.closeDBResource(rs,ps);
+        }
+        return studentIDlist;
+    }
+
+    public static ArrayList<Paper> markPapersDao(Connection con, String examuuid, String studentid, String sql) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Paper paper=null;
+        ArrayList<Paper> papers=new ArrayList<>();
+        try{
+            ps=con.prepareStatement(sql);
+            ps.setString(1,studentid);
+            ps.setString(2,examuuid);
+            rs=ps.executeQuery();
+            while (rs.next()){
+                long paper_serialNumber=rs.getLong("paper_serialNumber");
+                String studentID=rs.getString("studentID");
+                String examAssignuuid=rs.getString("examAssignuuid");
+                int questiontype=rs.getInt("questiontype");
+                String paper_title=rs.getString("paper_title");
+                String paper_titleimage=rs.getString("paper_titleimage");
+                String paper_option1=rs.getString("paper_option1");
+                String paper_option2=rs.getString("paper_option2");
+                String paper_option3=rs.getString("paper_option3");
+                String paper_option4=rs.getString("paper_option4");
+                String paper_answer=rs.getString("paper_answer");
+                String youranswer=rs.getString("youranswer");
+                double score=rs.getDouble("score");
+                paper=new Paper(paper_serialNumber,studentID,examAssignuuid,questiontype,paper_title,paper_titleimage,
+                        paper_option1,paper_option2,paper_option3,paper_option4,paper_answer,youranswer,score);
+                papers.add(paper);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            Pool.closeDBResource(rs,ps);
+        }
+        return papers;
+    }
+
+    public static void updatePaperDao(Connection con, String score, String order, String sql) {
+        PreparedStatement ps = null;
+        long serialNumber=Long.parseLong(order);
+        try{
+            ps=con.prepareStatement(sql);
+            ps.setString(1,score);
+            ps.setLong(2,serialNumber);
+            int i=ps.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            Pool.close(ps);
+        }
+    }
+
+    public static void updateGradeDao(Connection con, String examuuid, String studentid, double subject, String sql1, String sql2, String sql3) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        double object=0;
+        double total=0;
+        try{
+            ps=con.prepareStatement(sql1);
+            ps.setString(1,studentid);
+            ps.setString(2,examuuid);
+            rs=ps.executeQuery();
+            if(rs.next()){
+            object=rs.getDouble("objectivequestion");}
+            ps=con.prepareStatement(sql2);
+            ps.setDouble(1,subject);
+            ps.setString(2,studentid);
+            ps.setString(3,examuuid);
+            int i=ps.executeUpdate();
+            total=subject+object;
+            ps=con.prepareStatement(sql3);
+            ps.setDouble(1,total);
+            ps.setString(2,studentid);
+            ps.setString(3,examuuid);
+            int y=ps.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            Pool.closeDBResource(rs,ps);
+        }
     }
 }

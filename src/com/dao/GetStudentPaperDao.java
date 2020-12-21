@@ -20,7 +20,7 @@ public class GetStudentPaperDao {
         ps.setString(2,examuuid);
         rs = ps.executeQuery();
         while (rs.next()){
-            Long paper_serialNumber=rs.getLong("paper_serialNumber");
+            long paper_serialNumber=rs.getLong("paper_serialNumber");
             String studentID=rs.getString("studentID");
             String examAssignuuid=rs.getString("examAssignuuid");
             int questiontype=rs.getInt("questiontype");
@@ -32,7 +32,7 @@ public class GetStudentPaperDao {
             String paper_option4=rs.getString("paper_option4");
             String paper_answer=rs.getString("paper_answer");
             String youranswer=rs.getString("youranswer");
-            Double score=rs.getDouble("score");
+            double score=rs.getDouble("score");
             paper=new Paper(paper_serialNumber,studentID,examAssignuuid,questiontype,paper_title,paper_titleimage,
                     paper_option1,paper_option2,paper_option3,paper_option4,paper_answer,youranswer,score);
             papers.add(paper);

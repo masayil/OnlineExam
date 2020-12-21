@@ -38,11 +38,18 @@
                         <img src="${pageContext.request.contextPath}/img/examlogo.png">
                         <h3>考试：${ExamAssignlist_before.examAssign_name}</h3>
                         <p>科目：
-                        <c:forEach var="newlessons_list" items="${requestScope.newlessons_list}">
-                            <c:if test="${ExamAssignlist_before.lessonuuid eq newlessons_list.newlesson_uuid}">
-                                ${newlessons_list.newlesson_name}
+                        <c:forEach var="newlessons_list1" items="${requestScope.newlessons_list}">
+                            <c:if test="${ExamAssignlist_before.lessonuuid eq newlessons_list1.newlesson_uuid}">
+                                ${newlessons_list1.newlesson_name}
                             </c:if>
                         </c:forEach>
+                        </p>
+                                   <p>班级：
+                               <c:forEach var="newlessons_list2" items="${requestScope.newlessons_list}">
+                                   <c:if test="${ExamAssignlist_before.lessonuuid eq newlessons_list2.newlesson_uuid}">
+                                       ${newlessons_list2.newlesson_class}
+                                   </c:if>
+                               </c:forEach>
                         </p>
                                 <p>开始时间：${ExamAssignlist_before.startTime}</p>
                         <p>结束时间：${ExamAssignlist_before.endTime}</p>
@@ -68,11 +75,18 @@
                         <img src="${pageContext.request.contextPath}/img/examlogo.png">
                         <h3>考试：${ExamAssignlist_ing.examAssign_name}</h3>
                                         <p>科目：
-                        <c:forEach var="newlessons_list" items="${requestScope.newlessons_list}">
-                            <c:if test="${ExamAssignlist_ing.lessonuuid eq newlessons_list.newlesson_uuid}">
-                                ${newlessons_list.newlesson_name}
+                        <c:forEach var="newlessons_list3" items="${requestScope.newlessons_list}">
+                            <c:if test="${ExamAssignlist_ing.lessonuuid eq newlessons_list3.newlesson_uuid}">
+                                ${newlessons_list3.newlesson_name}
                             </c:if>
                         </c:forEach>
+                        </p>
+                                   <p>班级：
+                               <c:forEach var="newlessons_list4" items="${requestScope.newlessons_list}">
+                                   <c:if test="${ExamAssignlist_ing.lessonuuid eq newlessons_list4.newlesson_uuid}">
+                                       ${newlessons_list4.newlesson_class}
+                                   </c:if>
+                               </c:forEach>
                         </p>
                                 <p>开始时间：${ExamAssignlist_ing.startTime}</p>
                         <p>结束时间：${ExamAssignlist_ing.endTime}</p>

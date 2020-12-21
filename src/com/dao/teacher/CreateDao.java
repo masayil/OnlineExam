@@ -1,9 +1,6 @@
 package com.dao.teacher;
 
-import com.bean.entity.ExamAssign;
-import com.bean.entity.Newlesson;
-import com.bean.entity.Paper;
-import com.bean.entity.Student;
+import com.bean.entity.*;
 import com.myutil.Pool;
 
 import java.sql.Connection;
@@ -251,5 +248,64 @@ public class CreateDao {
         }finally {
             Pool.closeDBResource(rs,ps);
         }
+    }
+
+    public static ArrayList<Grade> getPictureDao(Connection con, String examuuid, String sql) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Grade grade=null;
+        ArrayList<Grade> grades=new ArrayList<>();
+        try{
+            ps=con.prepareStatement(sql);
+            ps.setString(1,examuuid);
+            rs=ps.executeQuery();
+            while (rs.next()){
+                long grade_serialNumber=rs.getLong("grade_serialNumber");
+                double objectivequestion=rs.getDouble("objectivequestion");
+                double subjectivequestion=rs.getDouble("subjectivequestion");
+                double total=rs.getDouble("total");
+                String studentID=rs.getString("studentID");
+                String examAssignuuid=rs.getString("examAssignuuid");
+                grade=new Grade(grade_serialNumber,objectivequestion,subjectivequestion,total,studentID,examAssignuuid);
+                grades.add(grade);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            Pool.closeDBResource(rs,ps);
+        }
+        return grades;
+    }
+
+    public static ArrayList<Student> getSpecialStuListDao(Connection con, String[] studentID_list, String sql) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Student student=null;
+        ArrayList<Student> students=new ArrayList<>();
+        try{
+            for (String s : studentID_list) {
+                ps = con.prepareStatement(sql);
+                ps.setString(1, s);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    long s_serialNumber = rs.getLong("s_serialNumber");
+                    String s_id = rs.getString("s_id");
+                    String s_name = rs.getString("s_name");
+                    String s_password = rs.getString("s_password");
+                    String s_sex = rs.getString("s_sex");
+                    String s_college = rs.getString("s_college");
+                    String s_department = rs.getString("s_department");
+                    String s_class = rs.getString("s_class");
+                    String s_major = rs.getString("s_major");
+                    student = new Student(s_serialNumber, s_id, s_name, s_password, s_sex, s_college, s_department, s_class, s_major);
+                    students.add(student);
+                }
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            Pool.closeDBResource(rs,ps);
+        }
+        return students;
     }
 }

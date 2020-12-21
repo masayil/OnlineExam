@@ -28,7 +28,7 @@ import org.jfree.ui.TextAnchor;
  */
 public class BarChart_ByDatasetUtilities {
 
-    public static String generateBarChart(HttpSession session) throws IOException {
+    public static String generateBarChart(HttpSession session,double[][] data) throws IOException {
         /**
          * 以下代码通过设置主题样式解決中文乱码问题
          */
@@ -43,9 +43,8 @@ public class BarChart_ByDatasetUtilities {
         // 应用主题样式
         ChartFactory.setChartTheme(standardChartTheme);
 
-        double[][] data = new double[][] { { 1, 5, 20, 10,4 } };
         String[] rowKeys = new String[] { "人数" };
-        String[] columnKeys = new String[] { "<60", ">=60||<70", ">=70||<80", ">=80||<90",">=90" };
+        String[] columnKeys = new String[] { "<60", ">=60&&<70", ">=70&&<80", ">=80&&<90",">=90" };
         // 利用DatasetUtilities工具类创建CategoryDataset
         CategoryDataset dataSet = DatasetUtilities.createCategoryDataset(rowKeys, // 比较的内容数组（肉类）
                 columnKeys, // 比较的分类数组（地区分类）
@@ -53,7 +52,7 @@ public class BarChart_ByDatasetUtilities {
         );
         // 调用ChartFactory工厂类生成3D柱状图
         JFreeChart barChart = ChartFactory.createBarChart("分数分布统计图", // 图表的标题
-                "班级", // 比较的分类标签
+                "分数段", // 比较的分类标签
                 "人数", // 比较的内容标签
                 dataSet, // 比较的数据集
 //    		PlotOrientation.HORIZONTAL,		//图表显示方向：水平方向

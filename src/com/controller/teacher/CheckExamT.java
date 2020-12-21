@@ -39,6 +39,7 @@ public class CheckExamT extends HttpServlet {
             ArrayList<ExamAssign> ExamAssignlist_before;
             ArrayList<ExamAssign> ExamAssignlist_ing;
             ArrayList<ExamAssign> ExamAssignlist_normal;
+            ArrayList<ExamAssign> ExamAssignlist_done;
             HashMap <String,ArrayList<ExamAssign>> map;
             switch (type){
                 case "released":
@@ -59,7 +60,11 @@ public class CheckExamT extends HttpServlet {
                     request.getRequestDispatcher("./teacher/teaApprove.jsp").forward(request, response);
                     break;
                 case "done":
-                    String s="11";
+                    ExamAssignlist_done=FindService.getExamAssign_list3Service(con,newlessons_list,Generatetime.gettime());
+                    dbpool.close(con);
+                    request.setAttribute("ExamAssignlist_done", ExamAssignlist_done);
+                    request.setAttribute("newlessons_list", newlessons_list);
+                    request.getRequestDispatcher("./teacher/teaDone.jsp").forward(request, response);
                     break;
             }
         }

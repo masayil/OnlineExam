@@ -1,8 +1,10 @@
 package com.service.teacher;
 
+import com.bean.entity.Grade;
 import com.bean.entity.Paper;
 import com.bean.entity.QuestionBank;
 import com.bean.entity.Student;
+import com.chart.BarChart_ByDatasetUtilities;
 import com.dao.teacher.CreateDao;
 import com.dao.teacher.FindDao;
 import com.myutil.Generatetime;
@@ -130,5 +132,43 @@ public class CreateService {
         String sql2="update grade set subjectivequestion=? where studentID=? and examAssignuuid=?";
         String sql3="update grade set total=? where studentID=? and examAssignuuid=?";
         CreateDao.updateGradeDao(con,examuuid,studentid,subject,sql1,sql2,sql3);
+    }
+
+    public static double[][] getPictureService(Connection con, String examuuid) {
+        String sql="select * from grade where examAssignuuid=?";
+        ArrayList<Grade> grades=CreateDao.getPictureDao(con,examuuid,sql);
+        double stage1=0;
+        double stage2=0;
+        double stage3=0;
+        double stage4=0;
+        double stage5=0;
+        for(int i=0;i<grades.size();i++){
+            if(grades.get(i).getTotal()<60){
+                stage1+=1;
+            }else if(grades.get(i).getTotal()<70){
+                stage2+=1;
+            }else if(grades.get(i).getTotal()<80){
+                stage3+=1;
+            }else if(grades.get(i).getTotal()<90){
+                stage4+=1;
+            }else if(grades.get(i).getTotal()>=90){
+                stage5+=1;
+            }
+        }
+        return new double[][] { { stage1, stage2, stage3, stage4,stage5 } };
+    }
+
+    public static ArrayList<Grade> getScorelistService(Connection con, String examuuid) {
+        String sql="select * from grade where examAssignuuid=?";
+        return CreateDao.getPictureDao(con,examuuid,sql);
+    }
+
+    public static ArrayList<Student> getSpecialStuListService(Connection con, ArrayList<Grade> gradeslist) {
+        String sql="select * from student where s_id=?";
+        String [] studentID_list=new String[gradeslist.size()];
+        for(int i=0;i<gradeslist.size();i++){
+            studentID_list[i]=gradeslist.get(i).getStudentID();
+        }
+        return CreateDao.getSpecialStuListDao(con,studentID_list,sql);
     }
 }

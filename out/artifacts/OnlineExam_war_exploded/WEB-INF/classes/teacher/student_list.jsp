@@ -18,8 +18,6 @@
 	-->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/btn1.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css" />
-    <script src="${pageContext.request.contextPath}/js/jquery-1.11.0.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
     <style>
         .content {
             width: 600px;
@@ -123,6 +121,7 @@
 
 </div>
 <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 <script>
     $(function () {
         $("#banji").click(function () {

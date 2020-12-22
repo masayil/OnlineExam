@@ -1,6 +1,7 @@
 package com.service;
 
 import com.bean.entity.Paper;
+import com.bean.entity.Student;
 import com.dao.GetStudentPaperDao;
 import com.myutil.Pool;
 
@@ -42,5 +43,10 @@ public class GetStudentPaperService {
     public static void updatePaper(Connection con,Long serialNumber, String answer){
         String sql="update paper set youranswer=? where paper_serialNumber=?";
         GetStudentPaperDao.updatePaperDao(con,serialNumber,answer,sql);
+    }
+
+    public static Student getOneStudentService(Connection con, String studentID) {
+        String sql="select * from student where s_id=?";
+        return GetStudentPaperDao.getOneStudentDao(con,studentID,sql);
     }
 }

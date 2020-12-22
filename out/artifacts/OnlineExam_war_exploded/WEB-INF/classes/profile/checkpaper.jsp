@@ -67,7 +67,7 @@
                     <ul>
 
                         <div class="test_content_nr_tt">
-                            <font>第${status1.count}题</font>&emsp;(${paper1.score}分)&emsp;<font>${paper1.paper_title}</font>
+                            <font><span style="color: darkgoldenrod;">第${status1.count}题</span></font> &emsp;(<span style="color: crimson;">${paper1.score}分</span>)&emsp;<font><font>${paper1.paper_title}</font>
                             <c:if test="${(paper1.paper_titleimage ne '') and (not empty paper1.paper_titleimage)}">
                                 <br>
                                 <a href="${paper1.paper_titleimage}" target="_blank"><img src="${paper1.paper_titleimage}" height="300" width="300"></a>
@@ -130,7 +130,7 @@
                     <c:forEach var="paper2" items="${requestScope.paper2}" varStatus="status2">
                     <ul>
                         <div class="test_content_nr_tt">
-                            <font>第${status2.count}题</font> &emsp;(${paper2.score}分)&emsp;<font>${paper2.paper_title}</font>
+                            <font><span style="color: darkgoldenrod;">第${status2.count}题</span></font> &emsp;(<span style="color: crimson;">${paper2.score}分</span>)&emsp;<font><font>${paper2.paper_title}</font>
                             <c:if test="${(paper2.paper_titleimage ne '') and (not empty paper2.paper_titleimage)}">
                                 <br>
                                 <a href="${paper2.paper_titleimage}" target="_blank"><img src="${paper2.paper_titleimage}" height="300" width="300"></a>
@@ -191,7 +191,7 @@
                     <c:forEach var="paper3" items="${requestScope.paper3}" varStatus="status3">
                     <ul>
                         <div class="test_content_nr_tt">
-                            <font>第${status3.count}题</font> &emsp;(${paper3.score}分)&emsp;<font><font>${paper3.paper_title}</font>
+                            <font><span style="color: darkgoldenrod;">第${status3.count}题</span></font> &emsp;(<span style="color: crimson;">${paper3.score}分</span>)&emsp;<font><font>${paper3.paper_title}</font>
                             <c:if test="${(paper3.paper_titleimage ne '') and (not empty paper3.paper_titleimage)}">
                             <br>
                             <a href="${paper3.paper_titleimage}" target="_blank"><img src="${paper3.paper_titleimage}" height="300" width="300"></a>
@@ -240,7 +240,7 @@
                     <c:forEach var="paper4" items="${requestScope.paper4}" varStatus="status4">
                     <ul>
                         <div class="test_content_nr_tt">
-                            <font>第${status4.count}题</font> &emsp;(${paper4.score}分)&emsp;<font><font>${paper4.paper_title}</font>
+                            <font><span style="color: darkgoldenrod;">第${status4.count}题</span></font> &emsp;(<span style="color: crimson;">${paper4.score}分</span>)&emsp;<font><font>${paper4.paper_title}</font>
                             <br>
                             <c:if test="${(paper4.paper_titleimage ne '') and (not empty paper4.paper_titleimage)}">
                                <a href="${paper4.paper_titleimage}" target="_blank"><img src="${paper4.paper_titleimage}" height="300" width="300"></a>

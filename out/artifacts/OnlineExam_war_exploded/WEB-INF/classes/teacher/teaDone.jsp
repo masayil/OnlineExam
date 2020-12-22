@@ -55,7 +55,7 @@
                         <p>总分：${ExamAssignlist_done.totalscore}</p>
                         <b></b>
                         <font>
-                            <a href="javascript:void(0)" onclick="Lookdetails('${ExamAssignlist_done.examAssign_uuid}')" style="text-decoration:none;margin-left: 80px;">考试详情</a>
+                            <a href="javascript:void(0)" onclick="Lookdetails('${ExamAssignlist_done.examAssign_uuid}','${ExamAssignlist_done.examAssign_name}','${ExamAssignlist_done.lessonuuid}')" style="text-decoration:none;margin-left: 80px;">考试详情</a>
                         </font>
                     </span>
                 </li>
@@ -68,8 +68,8 @@
 <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/syalert/syalert.min.js"></script>
 <script>
-    function Lookdetails(examuuid) {
-        window.open('ExamSituation?examuuid='+examuuid, '_target');
+    function Lookdetails(examuuid,examname,lessonuuid) {
+        window.open('ExamSituation?examuuid='+examuuid+'&examname='+examname+'&lessonuuid='+lessonuuid, '_target');
     }
 </script>
 </body>

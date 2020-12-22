@@ -171,4 +171,11 @@ public class CreateService {
         }
         return CreateDao.getSpecialStuListDao(con,studentID_list,sql);
     }
+
+    public static ArrayList<Student> getNoGradeListService(Connection con, String lessonuuid) {
+        String sql1 = "select * from student where s_id in (select retake_studentID from retake where lessonuuid=?)";
+        String sql2 = "select * from student where s_class in (select newlesson_class from newlesson where newlesson_uuid=?)";
+        return CreateDao.getNoGradeListDao(con, lessonuuid, sql1, sql2);
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.dao;
 
 import com.bean.entity.Paper;
+import com.bean.entity.Student;
 import com.myutil.Pool;
 
 import java.sql.Connection;
@@ -109,5 +110,33 @@ public class GetStudentPaperDao {
         }finally {
             Pool.close(ps);
         }
+    }
+
+    public static Student getOneStudentDao(Connection con, String studentID, String sql) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Student student=null;
+        try{
+            ps=con.prepareStatement(sql);
+            ps.setString(1,studentID);
+            rs=ps.executeQuery();
+            while (rs.next()){
+                long s_serialNumber=rs.getLong("s_serialNumber");
+                String s_id=rs.getString("s_id");
+                String s_name=rs.getString("s_name");
+                String s_password=rs.getString("s_password");
+                String s_sex=rs.getString("s_sex");
+                String s_college=rs.getString("s_college");
+                String s_department=rs.getString("s_department");
+                String s_class=rs.getString("s_class");
+                String s_major=rs.getString("s_major");
+                student=new Student(s_serialNumber,s_id,s_name,s_password,s_sex,s_college,s_department,s_class,s_major);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            Pool.closeDBResource(rs,ps);
+        }
+        return student;
     }
 }

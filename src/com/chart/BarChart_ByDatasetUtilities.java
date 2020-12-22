@@ -20,12 +20,7 @@ import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DatasetUtilities;
 import org.jfree.ui.TextAnchor;
 
-/**
- * 使用DatasetUtilities工具类生成柱状图并进行美化
- *
- * @author lingtouyang的csdn博客 ▄┻┳═一 ☆
- *
- */
+
 public class BarChart_ByDatasetUtilities {
 
     public static String generateBarChart(HttpSession session,double[][] data) throws IOException {

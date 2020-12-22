@@ -7,10 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+
 
 public class CreateDao {
     public static boolean CreateExamDao(Connection con, String lessonuuid, String paperuuid, String starttime,
@@ -300,6 +298,52 @@ public class CreateDao {
                     student = new Student(s_serialNumber, s_id, s_name, s_password, s_sex, s_college, s_department, s_class, s_major);
                     students.add(student);
                 }
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            Pool.closeDBResource(rs,ps);
+        }
+        return students;
+    }
+
+    public static ArrayList<Student> getNoGradeListDao(Connection con, String lessonuuid, String sql1,String sql2) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Student student=null;
+        ArrayList<Student> students=new ArrayList<>();
+        try{
+            ps=con.prepareStatement(sql1);
+            ps.setString(1,lessonuuid);
+            rs=ps.executeQuery();
+            while (rs.next()){
+                long s_serialNumber=rs.getLong("s_serialNumber");
+                String s_id=rs.getString("s_id");
+                String s_name=rs.getString("s_name");
+                String s_password=rs.getString("s_password");
+                String s_sex=rs.getString("s_sex");
+                String s_college=rs.getString("s_college");
+                String s_department=rs.getString("s_department");
+                String s_class=rs.getString("s_class");
+                String s_major=rs.getString("s_major");
+                student=new Student(s_serialNumber,s_id,s_name,s_password,s_sex,s_college,s_department,s_class,s_major);
+                students.add(student);
+            }
+            ps=con.prepareStatement(sql2);
+            ps.setString(1,lessonuuid);
+            rs=ps.executeQuery();
+            while (rs.next()){
+                long s_serialNumber=rs.getLong("s_serialNumber");
+                String s_id=rs.getString("s_id");
+                String s_name=rs.getString("s_name");
+                String s_password=rs.getString("s_password");
+                String s_sex=rs.getString("s_sex");
+                String s_college=rs.getString("s_college");
+                String s_department=rs.getString("s_department");
+                String s_class=rs.getString("s_class");
+                String s_major=rs.getString("s_major");
+                student=new Student(s_serialNumber,s_id,s_name,s_password,s_sex,s_college,s_department,s_class,s_major);
+                students.add(student);
             }
         }catch (SQLException e){
             e.printStackTrace();

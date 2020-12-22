@@ -36,6 +36,7 @@
 </head>
 
 <body>
+<h1 style="text-align: center;">${examname}</h1>
 <%
 String picture=(String)request.getAttribute("imgName");
 %>
@@ -75,7 +76,16 @@ String picture=(String)request.getAttribute("imgName");
                             </c:forEach>
                         </td>
                         <td>${gradeslist.total}</td>
-                        <td>查看试卷</td>
+                        <td><button type="button" class="btn btn-info" onclick="checkpaper('${gradeslist.studentID}','${gradeslist.examAssignuuid}','${examname}','${gradeslist.total}')">查看试卷</button></td>
+                    </tr>
+                </c:forEach>
+                <c:forEach var="wantnoGrade" items="${requestScope.wantnoGrade}">
+                    <tr class="warning">
+                        <td>${wantnoGrade.s_id}</td>
+                        <td>${wantnoGrade.s_name}</td>
+                        <td>${wantnoGrade.s_class}</td>
+                        <td><span style="color: darkred;">未参加考试</span></td>
+                        <td></td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -104,6 +114,9 @@ String picture=(String)request.getAttribute("imgName");
             table.style.display="block";
             $("#btn").html("查看成绩分布图");
         }
+    }
+    function checkpaper(studentid,examuuid,examname,total) {
+        window.open('GetStuPaperServlet?examuuid='+examuuid+'&studentid='+studentid+'&examname='+examname+'&total='+total, '_blank');
     }
 </script>
 </body>

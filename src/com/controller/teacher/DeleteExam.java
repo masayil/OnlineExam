@@ -27,8 +27,10 @@ public class DeleteExam extends HttpServlet {
         }else {
             String examuuid=request.getParameter("examuuid");
             if(CreateService.deleteExamTService(con,examuuid)) {
+                dbpool.close(con);
                 out.print("<script language='javascript'>alert('撤销成功!');window.location.href='CheckExamT?type=released';</script>");
             }else {
+                dbpool.close(con);
                 out.print("<script language='javascript'>alert('请再试一次!');window.location.href='CheckExamT?type=released';</script>");
             }
         }

@@ -80,7 +80,7 @@
 <script>
     function openBank1(category,questiontype) {
         var text="";
-        window.open('OpenBankServlet?category='+category+'&questiontype='+questiontype+'&title='+text, '_target');
+        window.open('OpenBankServlet?category='+category+'&questiontype='+questiontype+'&title='+text, '_blank');
     }
     function openBank2(category,questiontype) {
         var text = document.getElementById("title").value;
@@ -88,21 +88,21 @@
             alert("请输入内容");
             return false;
         } else {
-            window.open('OpenBankServlet?category=' + category + '&questiontype=' + questiontype + '&title=' + text, '_target');
+            window.open('OpenBankServlet?category=' + category + '&questiontype=' + questiontype + '&title=' + text, '_blank');
         }
     }
     function openBank3(category,questiontype) {
         var text=document.getElementById("coureseselect").value;
-        window.open('OpenBankServlet?category='+category+'&questiontype='+questiontype+'&title='+text, '_target');
+        window.open('OpenBankServlet?category='+category+'&questiontype='+questiontype+'&title='+text, '_blank');
     }
     function openBank4(category,questiontype) {
 
              var text=document.getElementById("teacherselect").value;
-            window.open('OpenBankServlet?category=' + category + '&questiontype=' + questiontype + '&title=' + text, '_target');
+            window.open('OpenBankServlet?category=' + category + '&questiontype=' + questiontype + '&title=' + text, '_blank');
     }
     function openBank5(category,questiontype) {
         var text="";
-        window.open('OpenBankServlet?category='+category+'&questiontype='+questiontype+'&title='+text, '_target');
+        window.open('OpenBankServlet?category='+category+'&questiontype='+questiontype+'&title='+text, '_blank');
     }
 </script>
 </body>

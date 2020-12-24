@@ -14,7 +14,13 @@ public class LogoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         PrintWriter out = response.getWriter();
-        session.invalidate();
-        out.print("<script language='javascript'>window.top.location.href='main.jsp';</script>");
+        String status=request.getParameter("status");
+        if(status.equals("admin")){
+            session.invalidate();
+            out.print("<script language='javascript'>window.top.location.href='admin.jsp';</script>");
+        }else if(status.equals("teacher")||status.equals("student")){
+            session.invalidate();
+            out.print("<script language='javascript'>window.top.location.href='main.jsp';</script>");
+        }
     }
 }

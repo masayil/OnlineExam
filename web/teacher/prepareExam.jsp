@@ -65,13 +65,13 @@
     $(function () {
         $('#datetimepicker1').datetimepicker({
             language: 'zh-CN',
-            format: 'yyyy-mm-dd hh:ii:ss',
+            format: 'yyyy-mm-dd hh:ii:00',
             autoclose: 1,
             startDate: new Date()
         });
         $('#datetimepicker2').datetimepicker({
             language: 'zh-CN',
-            format: 'yyyy-mm-dd hh:ii:ss',
+            format: 'yyyy-mm-dd hh:ii:00',
             autoclose: 1,
             startDate: new Date()
         });

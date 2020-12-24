@@ -89,7 +89,7 @@ public class LoginServlet extends HttpServlet {
 				dbpool.close(con);
 				if(null!=admin) {
 				request.getSession().setAttribute("admin", admin);
-				response.sendRedirect("paper.jsp");
+				response.sendRedirect("adminHome.jsp");
 				}else {
 					request.setAttribute("msg", "管理员不存在");
 					request.getRequestDispatcher("admin.jsp").forward(request, response);

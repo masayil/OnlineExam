@@ -76,15 +76,7 @@
         </ul>
 
     </div>
-    <!--<ul class="pager">
-        <li><a href="#">上一页</a></li>
-        <li>&emsp;&emsp;</li>
-        <li>第X页</li>
-        <li>&emsp;&emsp;</li>
-        <li>共X页</li>
-        <li>&emsp;&emsp;</li>
-        <li><a href="#">下一页</a></li>
-    </ul>-->
+
 </div>
 <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/syalert/syalert.min.js"></script>

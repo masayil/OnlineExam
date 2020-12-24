@@ -14,4 +14,9 @@ public class ChangePasswordService {
         String sql="update teacher set t_password=? where t_id=?";
         return ChangePasswordDao.PasswordChangeDao(password,id,con,sql);
     }
+
+    public static boolean AdminPasswordService(String password, String id, Connection con) {
+        String sql="update administrator set a_password=? where a_id=?";
+        return ChangePasswordDao.PasswordChangeDao(password,id,con,sql);
+    }
 }

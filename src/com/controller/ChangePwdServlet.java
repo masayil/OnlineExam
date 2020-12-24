@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.bean.entity.Administrator;
 import com.bean.entity.Student;
 import com.bean.entity.Teacher;
 import com.myutil.Pool;
@@ -60,8 +61,16 @@ public class ChangePwdServlet extends HttpServlet {
                     }
                     break;
                 case "admin":
-                    break;
-                default:
+                    ischanged=ChangePasswordService.AdminPasswordService(password,id,con);
+                    dbpool.close(con);
+                    if(ischanged){
+                        Administrator a=(Administrator)session.getAttribute("admin");
+                        Administrator admin=new Administrator(a.getA_serialNumber(),a.getA_id(),a.getA_name(),password,a.getA_sex());
+                        session.setAttribute("admin",admin);
+                        response.getWriter().print("yes");
+                    }else {
+                        response.getWriter().print("no");
+                    }
                     break;
             }
         }

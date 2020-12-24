@@ -52,7 +52,7 @@
         <li class="layui-nav-item to-index">
             <a>欢迎登陆</a></li>
         <li class="layui-nav-item lafitewu_exit to-index">
-            <a href="LogoutServlet"><i class="iconfont">&#xe704;</i>退出</a>
+            <a href="LogoutServlet?status=student"><i class="iconfont">&#xe704;</i>退出</a>
         </li>
     </ul>
 </div>

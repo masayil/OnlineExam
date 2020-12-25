@@ -1,6 +1,7 @@
 package com.myutil;
 
 import com.bean.entity.QuestionBank;
+import com.bean.entity.Teacher;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -67,6 +68,41 @@ public class ReadExcelFile {
         return questionBankList;
     }
 
+    public List<Teacher> getExcelInfoTeacherlist(File mFile){
+        String fileName=mFile.getName();
+        List<Teacher> teacherList=null;
+        try{
+            if(!validateExcel(fileName)){
+                return null;
+            }
+            boolean isExcel2003=true;
+            if(isExcel2007(fileName)){
+                isExcel2003=false;
+            }
+            teacherList=createExcelInfoTeacherlist(mFile,isExcel2003);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return teacherList;
+    }
+
+    private List<Teacher> createExcelInfoTeacherlist(File mFile, boolean isExcel2003) {
+        List<Teacher> teacherList=null;
+        try{
+            Workbook wb=null;
+            if(isExcel2003){
+                wb=new HSSFWorkbook(new FileInputStream(mFile));
+            }else{
+                wb=new XSSFWorkbook(mFile);
+            }
+            teacherList=readExcelInfoTeacherlist(wb);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return teacherList;
+    }
+
+
     public List<QuestionBank> createExcel1(File mFile,boolean isExcel2003,String teacherid){
         List<QuestionBank> questionBankList=null;
         try{
@@ -81,6 +117,42 @@ public class ReadExcelFile {
             e.printStackTrace();
         }
         return questionBankList;
+    }
+    private List<Teacher> readExcelInfoTeacherlist(Workbook wb) {
+        List<Teacher> teacherList=new ArrayList<>();
+        Sheet sheet=wb.getSheetAt(0);
+        this.totalRows=sheet.getPhysicalNumberOfRows();
+        if(totalRows>1&&sheet.getRow(0)!=null){
+            this.totalCells=sheet.getRow(0).getPhysicalNumberOfCells();
+        }
+        for(int r=1;r<totalRows;r++){
+            Row row=sheet.getRow(r);
+            if(row==null){
+                continue;
+            }
+            Teacher teacher=new Teacher();
+            for(int c=0;c<this.totalCells;c++){
+                Cell cell=row.getCell(c);
+                if(null!=cell){
+                    if(c==0){
+                        int k= (int) cell.getNumericCellValue();
+                        teacher.setT_id(String.valueOf(k));
+                    }else if(c==1){
+                        teacher.setT_name(cell.getStringCellValue());
+                    }else if(c==2){
+                        teacher.setT_password(cell.getStringCellValue());
+                    }else if(c==3){
+                        teacher.setT_sex(cell.getStringCellValue());
+                    }else if(c==4){
+                        teacher.setT_department(cell.getStringCellValue());
+                    }else if(c==5){
+                        teacher.setT_college(cell.getStringCellValue());
+                    }
+                }
+            }
+            teacherList.add(teacher);
+        }
+        return teacherList;
     }
 
     public List<QuestionBank> readExcelValue1(Workbook wb,String teacherid){

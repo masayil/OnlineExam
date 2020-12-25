@@ -41,7 +41,7 @@
 
 <div>
     <h3>批量上传</h3>
-<form action="UploadQServlet?" method="post" enctype="multipart/form-data">
+<form action="UploadQServlet" method="post" enctype="multipart/form-data">
         选择文件：<input type="file" name="filepath1">
     <input type="submit" value="提交" style="border-radius: 10px;background: #2F4056;width: 80px;height: 40px;color: yellow;">
 </form>

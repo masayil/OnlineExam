@@ -87,16 +87,20 @@
             <li>
                 <a href="javascript:void(0)">
                     <i class="iconfont left-nav-li" lay-tips="学生管理">&#xe708;</i>
-                    <cite>学生管理</cite>
+                    <cite>班级学生管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="javascript:void(0)" onclick="window.maincontent.location.href='DownloadTempletServlet'">
-                            <cite>浏览</cite></a>
+                        <a href="javascript:void(0)" onclick="window.maincontent.location.href='ManageClass'">
+                            <cite>班级管理</cite></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="window.maincontent.location.href='ManageStudent'">
+                            <cite>学生管理</cite></a>
                     </li>
                     <li>
                         <a href="javascript:void(0)" onclick="window.maincontent.location.href='BankGuideServlet?t_department=${teacher.t_department}'">
-                            <cite>导入学生</cite></a>
+                            <cite>批量导入学生</cite></a>
                     </li>
                 </ul>
             </li>

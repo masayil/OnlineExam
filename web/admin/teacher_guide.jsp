@@ -1,5 +1,7 @@
+<%@ page import="java.io.File" %>
+<%@ page import="java.util.Objects" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
+<%@ page language="java" pageEncoding="UTF-8" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -36,6 +38,11 @@
 
 <body>,
 <jsp:useBean id="admin" type="com.bean.entity.Administrator" scope="session"></jsp:useBean>
+<%
+    File downLoadFileDir=new File(request.getServletContext().getRealPath("/uploadfile/list/teacher"));
+    File [] teacherlist;
+    teacherlist=downLoadFileDir.listFiles();
+%>
 <div style="padding-left: 50px;padding-top: 30px;">
     <div style="background: lightgrey;text-align: center;padding-top: 30px;height: 500px;width: 1200px;">
         <div><h1>教师管理</h1><br>
@@ -63,8 +70,9 @@
             </div>
             <br>
             <div><h2>导入教师</h2></div><br>
-            <button type="button" class="btn btn-info" style="width: 90px;" onclick="">单个导入</button>&emsp;&emsp;&emsp;&emsp;
-            <button type="button" class="btn btn-info" style="width: 90px;" onclick="">批量导入</button>
+            <button type="button" class="btn btn-info" style="width: 90px;" onclick="window.location.href='./admin/teacher_singleimport.jsp'">单个导入</button>&emsp;&emsp;&emsp;&emsp;
+            <button type="button" class="btn btn-info" style="width: 90px;" onclick="window.location.href='./admin/teacher_multiImport.jsp'">批量导入</button>&emsp;&emsp;&emsp;&emsp;
+            <button type="button" class="btn btn-info" style="width: 120px;" onclick="window.location.href='DownloadTeaTemplet?resPath=<%=teacherlist[0].getName()%>'">导入模板下载</button>
         </div>
     </div>
 </div>

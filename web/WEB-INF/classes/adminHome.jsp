@@ -63,6 +63,12 @@
     <div id="side-nav">
         <ul id="nav">
             <li>
+                <a href="javascript:void(0)" onclick="window.maincontent.location.href='KeMu'">
+                    <i class="iconfont left-nav-li" lay-tips="科目管理">&#xe708;</i>
+                    <cite>科目管理</cite>
+                </a>
+            </li>
+            <li>
                 <a href="javascript:void(0)" onclick="window.maincontent.location.href='CourseManage'">
                     <i class="iconfont left-nav-li" lay-tips="课程管理">&#xe708;</i>
                     <cite>课程管理</cite>
@@ -97,10 +103,6 @@
                     <li>
                         <a href="javascript:void(0)" onclick="window.maincontent.location.href='ManageStudent'">
                             <cite>学生管理</cite></a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)" onclick="window.maincontent.location.href='BankGuideServlet?t_department=${teacher.t_department}'">
-                            <cite>批量导入学生</cite></a>
                     </li>
                 </ul>
             </li>

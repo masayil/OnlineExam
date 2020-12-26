@@ -116,15 +116,15 @@
         <tbody>
         <c:forEach var="banklist" items="${requestScope.banklist}" varStatus="status">
             <c:choose>
-                <c:when test="${banklist.questionBank_type eq 1}"><tr style="background: cadetblue;"></c:when>
-                <c:when test="${banklist.questionBank_type eq 2}"><tr style="background: lightpink;"></c:when>
+                <c:when test="${banklist.questionBank_type eq 1}"><tr style="background: bisque;"></c:when>
+                <c:when test="${banklist.questionBank_type eq 2}"><tr style="background: bisque;"></c:when>
                 <c:when test="${banklist.questionBank_type eq 3}"><tr style="background: bisque;"></c:when>
-                <c:when test="${banklist.questionBank_type eq 4}"><tr style="background: lightblue;"></c:when>
+                <c:when test="${banklist.questionBank_type eq 4}"><tr style="background: bisque;"></c:when>
             </c:choose>
                 <td style="width: 80px;">${banklist.questionBank_creatorID}</td>
-                <td style="width: 100px;">${banklist.questionBank_course}</td>
+            <td style="width: 100px;color: saddlebrown;"><strong>${banklist.questionBank_course}</strong></td>
                 <td style="width: 100px;">${banklist.questionBank_point}</td>
-                <td style="width: 70px;color: #313944;">
+                <td style="width: 70px;color: orangered;">
                     <c:choose>
                         <c:when test="${banklist.questionBank_type eq 1}"><strong>单选题</strong></c:when>
                         <c:when test="${banklist.questionBank_type eq 2}"><strong>多项题</strong></c:when>

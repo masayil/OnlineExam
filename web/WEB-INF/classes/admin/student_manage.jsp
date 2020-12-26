@@ -51,9 +51,9 @@
 <body>,
 <jsp:useBean id="admin" type="com.bean.entity.Administrator" scope="session"></jsp:useBean>
 <%
-    File downLoadFileDir=new File(request.getServletContext().getRealPath("/uploadfile/list/teacher"));
-    File [] teacherlist;
-    teacherlist=downLoadFileDir.listFiles();
+    File downLoadFileDir=new File(request.getServletContext().getRealPath("/uploadfile/list/student"));
+    File [] studentlist;
+    studentlist=downLoadFileDir.listFiles();
 %>
 <div style="padding-left: 50px;padding-top: 30px;">
     <div style="background: lightgrey;text-align: center;padding-top: 30px;height: 500px;width: 1200px;">
@@ -98,6 +98,9 @@
                 </form>
             </div>
             <br>
+            <div><h2>导入学生</h2></div><br>
+            <button type="button" class="btn btn-info" style="width: 90px;" onclick="window.location.href='./admin/student_multiImport.jsp'">批量导入</button>&emsp;&emsp;&emsp;&emsp;
+            <button type="button" class="btn btn-info" style="width: 120px;" onclick="window.location.href='DownloadStuTemplet?resPath=<%=studentlist[0].getName()%>'">导入模板下载</button>
         </div>
     </div>
 </div>

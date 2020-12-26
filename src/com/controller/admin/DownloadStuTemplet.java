@@ -12,10 +12,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-@WebServlet(name = "DownloadTeaTemplet",urlPatterns = {"/DownloadTeaTemplet"})
-public class DownloadTeaTemplet extends HttpServlet {
+@WebServlet(name = "DownloadStuTemplet",urlPatterns = {"/DownloadStuTemplet"})
+public class DownloadStuTemplet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        File downLoadFileDir=new File(getServletContext().getRealPath("/uploadfile/list/teacher"));
+        File downLoadFileDir=new File(getServletContext().getRealPath("/uploadfile/list/student"));
         String aFileName=null;
         FileInputStream in=null;
         ServletOutputStream out=null;
@@ -38,6 +38,7 @@ public class DownloadTeaTemplet extends HttpServlet {
             e.printStackTrace();
         }
     }
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request,response);
     }

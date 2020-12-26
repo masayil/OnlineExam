@@ -1,9 +1,6 @@
 package com.service.admin;
 
-import com.bean.entity.Majorclass;
-import com.bean.entity.Newlesson;
-import com.bean.entity.Student;
-import com.bean.entity.Teacher;
+import com.bean.entity.*;
 import com.dao.admin.QueryDao;
 
 import java.sql.Connection;
@@ -80,5 +77,10 @@ public class QueryService {
     public static ArrayList<Student> getSearchStudentAdminService(Connection con, String studentname) {
         String sql="select * from student where s_name LIKE ?";
         return QueryDao.getSearchStudentAdminDao(con,studentname,sql);
+    }
+
+    public static ArrayList<Course> getCourseListService(Connection con) {
+        String sql="select * from course";
+        return QueryDao.getCourseListDao(con,sql);
     }
 }

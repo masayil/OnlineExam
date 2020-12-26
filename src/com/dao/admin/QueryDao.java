@@ -1,9 +1,6 @@
 package com.dao.admin;
 
-import com.bean.entity.Majorclass;
-import com.bean.entity.Newlesson;
-import com.bean.entity.Student;
-import com.bean.entity.Teacher;
+import com.bean.entity.*;
 import com.myutil.Pool;
 
 import java.sql.Connection;
@@ -332,5 +329,28 @@ public class QueryDao {
             Pool.closeDBResource(rs,ps);
         }
         return studentArrayList;
+    }
+
+    public static ArrayList<Course> getCourseListDao(Connection con, String sql) {
+        PreparedStatement ps=null;
+        ResultSet rs=null;
+        Course course=null;
+        ArrayList<Course> courseArrayList=new ArrayList<>();
+        try{
+            ps=con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while (rs.next()){
+                int course_serialNumber=rs.getInt("course_serialNumber");
+                String course_name=rs.getString("course_name");
+                String course_creator=rs.getString("course_creator");
+                course=new Course(course_serialNumber,course_name,course_creator);
+                courseArrayList.add(course);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            Pool.closeDBResource(rs,ps);
+        }
+        return courseArrayList;
     }
 }

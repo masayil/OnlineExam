@@ -1,6 +1,7 @@
 package com.myutil;
 
 import com.bean.entity.QuestionBank;
+import com.bean.entity.Student;
 import com.bean.entity.Teacher;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -86,6 +87,41 @@ public class ReadExcelFile {
         return teacherList;
     }
 
+    public List<Student> getExcelInfoStudentlist(File mFile) {
+        String fileName=mFile.getName();
+        List<Student> studentList=null;
+        try{
+            if(!validateExcel(fileName)){
+                return null;
+            }
+            boolean isExcel2003=true;
+            if(isExcel2007(fileName)){
+                isExcel2003=false;
+            }
+            studentList=createExcelInfoStudentlist(mFile,isExcel2003);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return studentList;
+    }
+
+    private List<Student> createExcelInfoStudentlist(File mFile, boolean isExcel2003) {
+        List<Student> studentList=null;
+        try{
+            Workbook wb=null;
+            if(isExcel2003){
+                wb=new HSSFWorkbook(new FileInputStream(mFile));
+            }else{
+                wb=new XSSFWorkbook(mFile);
+            }
+            studentList=readExcelInfoStudentlist(wb);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return studentList;
+    }
+
+
     private List<Teacher> createExcelInfoTeacherlist(File mFile, boolean isExcel2003) {
         List<Teacher> teacherList=null;
         try{
@@ -153,6 +189,48 @@ public class ReadExcelFile {
             teacherList.add(teacher);
         }
         return teacherList;
+    }
+
+
+    private List<Student> readExcelInfoStudentlist(Workbook wb) {
+        List<Student> studentList=new ArrayList<>();
+        Sheet sheet=wb.getSheetAt(0);
+        this.totalRows=sheet.getPhysicalNumberOfRows();
+        if(totalRows>1&&sheet.getRow(0)!=null){
+            this.totalCells=sheet.getRow(0).getPhysicalNumberOfCells();
+        }
+        for(int r=1;r<totalRows;r++){
+            Row row=sheet.getRow(r);
+            if(row==null){
+                continue;
+            }
+            Student student=new Student();
+            for(int c=0;c<this.totalCells;c++){
+                Cell cell=row.getCell(c);
+                if(null!=cell){
+                    if(c==0){
+                        int thisnumber= (int) cell.getNumericCellValue();
+                        student.setS_id(String.valueOf(thisnumber));
+                    }else if(c==1){
+                        student.setS_name(cell.getStringCellValue());
+                    }else if(c==2){
+                        student.setS_password(cell.getStringCellValue());
+                    }else if(c==3){
+                        student.setS_sex(cell.getStringCellValue());
+                    }else if(c==4){
+                        student.setS_college(cell.getStringCellValue());
+                    }else if(c==5){
+                        student.setS_department(cell.getStringCellValue());
+                    }else if(c==6){
+                        student.setS_major(cell.getStringCellValue());
+                    }else if(c==7){
+                        student.setS_class(cell.getStringCellValue());
+                    }
+                }
+            }
+            studentList.add(student);
+        }
+        return studentList;
     }
 
     public List<QuestionBank> readExcelValue1(Workbook wb,String teacherid){
@@ -331,4 +409,5 @@ public class ReadExcelFile {
 
         return questionBankList;
     }
+
 }

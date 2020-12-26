@@ -40,10 +40,11 @@
 <%
 String picture=(String)request.getAttribute("imgName");
 %>
-<div style="height: 60px;"></div>
-<button type="button" onclick="see()" style="margin: 30px; float: right;" id="btn" class="btn btn-danger">查看成绩分布图</button>
+<div style="height: 60px;"></div><button type="button" onclick="exportexcel('${examuuid}','${examname}','${lessonuuid}')" style="margin: 30px;position: absolute;left:1100px; "  class="btn btn-warning">导出成绩表</button>
+<button type="button" onclick="see()" style="margin: 30px; position: absolute;left:1300px;" id="btn" class="btn btn-danger">查看成绩分布图</button>
 <div id="flag1">
 <h2 style="text-align: center; color: darkgrey;">成绩表</h2>
+    <h3 style="text-align: center; color: darkgrey;">平均分：${average}&emsp;&emsp;&emsp;参考人数：${student_list.size()}&emsp;&emsp;&emsp;未参加人数：${wantnoGrade.size()}</h3>
 <div class="container" style="display: block;text-align: center;" id="table1">
     <div class="row clearfix">
         <div class="col-md-12 column">
@@ -117,6 +118,9 @@ String picture=(String)request.getAttribute("imgName");
     }
     function checkpaper(studentid,examuuid,examname,total) {
         window.open('GetStuPaperServlet?examuuid='+examuuid+'&studentid='+studentid+'&examname='+examname+'&total='+total, '_blank');
+    }
+    function exportexcel(examuuid,examname,lessonuuid) {
+        window.location.href="ExportGrade?examuuid="+examuuid+"&examname="+examname+"&lessonuuid="+lessonuuid;
     }
 </script>
 </body>

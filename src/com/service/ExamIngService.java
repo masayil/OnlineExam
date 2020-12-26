@@ -21,4 +21,9 @@ public class ExamIngService {
         String sql="select * from examAssign where lessonuuid=? order by examAssign_createDate desc";
         return ExamIngDao.getstuExamAssignlistDao(newlessonuuid,sql,con,now);
     }
+
+    public static ArrayList<ExamAssign> getstuExamAssignListSpecialService(Connection con, String lessonuuid,String now) {
+        String sql="select * from examAssign where lessonuuid=?";
+        return ExamIngDao.getstuExamAssignListSpecialDao(con,lessonuuid,sql,now);
+    }
 }

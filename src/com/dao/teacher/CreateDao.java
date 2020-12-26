@@ -41,13 +41,13 @@ public class CreateDao {
     public static ArrayList<Newlesson> getnewlessonTDao(Connection con, String t_id,String sql){
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Newlesson newlesson=new Newlesson();
         ArrayList<Newlesson> newlessonArrayList=new ArrayList<>();
         try{
             ps=con.prepareStatement(sql);
             ps.setString(1,t_id);
             rs=ps.executeQuery();
             while (rs.next()){
+                Newlesson newlesson=new Newlesson();
                 String newlesson_uuid=rs.getString("newlesson_uuid");
                 String newlesson_name=rs.getString("newlesson_name");
                 String newlesson_class=rs.getString("newlesson_class");
@@ -118,13 +118,13 @@ public class CreateDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         ArrayList<String> examuuidlist=new ArrayList<>();
-        String uuid= "";
         try{
             for(int i=0;i<examuuid.length;i++){
                 ps = con.prepareStatement(sql);
                 ps.setString(1,examuuid[i]);
                 rs = ps.executeQuery();
                 while (rs.next()){
+                    String uuid= "";
                     uuid=rs.getString("examAssignuuid");
                     examuuidlist.add(uuid);
                 }
@@ -351,5 +351,29 @@ public class CreateDao {
             Pool.closeDBResource(rs,ps);
         }
         return students;
+    }
+
+    public static ArrayList<Course> getcourseslist_madePaperDao(Connection con, String mydepart, String sql) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Course course=null;
+        ArrayList<Course> courseArrayList=new ArrayList<>();
+        try{
+            ps=con.prepareStatement(sql);
+            ps.setString(1,mydepart);
+            rs=ps.executeQuery();
+            while (rs.next()){
+                int course_serialNumber=rs.getInt("course_serialNumber");
+                String course_name=rs.getString("course_name");
+                String course_creator=rs.getString("course_creator");
+                course=new Course(course_serialNumber,course_name,course_creator);
+                courseArrayList.add(course);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            Pool.closeDBResource(rs,ps);
+        }
+        return courseArrayList;
     }
 }

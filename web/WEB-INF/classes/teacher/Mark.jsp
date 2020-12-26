@@ -112,7 +112,7 @@
                                     <li class="option">
                                         得分：
                                         <br>
-                                        <input type="number" id="myinput_${status4.count}" style="width: 80px;height: 40px;font-size: 24px;" name="myscore" onblur="checkborder(${paper4.score},${status4.count})" required>
+                                        <input type="text" id="myinput_${status4.count}" style="width: 80px;height: 40px;font-size: 24px;" name="myscore" onkeyup="checkborder(${paper4.score},${status4.count})" required>
                                         <input type="hidden" name="order" value=${paper4.paper_serialNumber}>
                                         <br>
                                     </li>

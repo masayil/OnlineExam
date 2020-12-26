@@ -79,7 +79,7 @@
     }
 </script>
 <div style="padding-left: 10px;padding-top: 50px;">
-    <table style="max-width: 1570px;text-align: center;font-size: 12px;">
+    <table style="max-width: 1570px;text-align: center;font-size: 12px;" id="haveactiontable">
         <caption style="text-align: center;"><h2>题库（${check}）</h2><br>
             <c:choose>
                 <c:when test="${category eq 'teacher_name'}">
@@ -99,6 +99,7 @@
                 <input type="radio" value="type3" name="q_type" id="q4" onclick="converttype('${category}')">判断</label>&emsp;&emsp;&emsp;
             <label for="q5">
                 <input type="radio" value="type4" name="q_type" id="q5" onclick="converttype('${category}')">简答</label>&emsp;&emsp;&emsp;
+           <!-- <br><br>自定义搜索：<input type="text" id="lin" placeholder="请输入需要搜索的内容">-->
         </caption>
         <thead>
         <tr>
@@ -125,7 +126,7 @@
             <td style="width: 80px;">${banklist.questionBank_creatorID}</td>
             <td style="width: 100px;color: saddlebrown;"><strong>${banklist.questionBank_course}</strong></td>
             <td style="width: 100px;">${banklist.questionBank_point}</td>
-            <td style="width: 70px;color: orangered;">
+            <td style="width: 70px;color: cornflowerblue;">
                 <c:choose>
                     <c:when test="${banklist.questionBank_type eq 1}"><strong>单选题</strong></c:when>
                     <c:when test="${banklist.questionBank_type eq 2}"><strong>多选题</strong></c:when>
@@ -186,6 +187,7 @@
 <input type="hidden" id="search" readonly value=${title}>
 <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
+<script src="${pageContext.request.contextPath}/js/lin_search.js"></script>
 <script>
     function nextpage(nowpage,allpage,category) {
         if(nowpage===allpage||nowpage>allpage){
@@ -251,6 +253,13 @@
                 }
             });
         }
+    }
+    var table_this = document.getElementById("haveactiontable");
+    var input_this = document.getElementById("lin")
+
+
+    input_this.onkeyup = function () {
+        new Search(table_this, input_this)
     }
 </script>
 </body>

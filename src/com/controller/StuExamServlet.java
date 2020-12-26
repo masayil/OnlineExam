@@ -30,7 +30,7 @@ public class StuExamServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String now = null;
         now=df.format(new Date());
         String method=request.getParameter("method");
@@ -68,7 +68,7 @@ public class StuExamServlet extends HttpServlet {
                 request.setAttribute("Newlessonlist_class", Newlessonlist_class);
                 request.setAttribute("Newlessonlist_other", Newlessonlist_other);
                 request.getRequestDispatcher("./profile/stuExamIng.jsp").forward(request, response);
-            } else {
+            } else if(method.equals("done")) {
                 try {
                     ExamAssignlist_class = ExamDoneService.getstuExamAssignlistService(Newlessonlist_class, con, now);
                 } catch (SQLException | ParseException throwables) {
@@ -91,6 +91,18 @@ public class StuExamServlet extends HttpServlet {
                 request.setAttribute("Newlessonlist_class", Newlessonlist_class);
                 request.setAttribute("gradelist", gradelist);
                 request.getRequestDispatcher("./profile/stuExamDone.jsp").forward(request, response);
+            }else if(method.equals("special")){
+                String lessonuuid=request.getParameter("lessonuuid");
+                ArrayList<ExamAssign> ExamAssignlist_special=ExamIngService.getstuExamAssignListSpecialService(con,lessonuuid,now);
+                dbpool.close(con);
+                if(ExamAssignlist_special.size()<1){
+                    out.print("<script language='javascript'>alert('此课程没有考试！');window.history.go(-1);</script>");
+                }else {
+                    request.setAttribute("ExamAssignlist_special", ExamAssignlist_special);
+                    request.setAttribute("Newlessonlist_class", Newlessonlist_class);
+                    request.setAttribute("Newlessonlist_other", Newlessonlist_other);
+                    request.getRequestDispatcher("./profile/stuExamIng.jsp").forward(request, response);
+                }
             }
         }
     }

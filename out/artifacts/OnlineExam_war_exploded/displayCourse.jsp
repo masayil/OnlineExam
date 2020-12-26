@@ -56,7 +56,7 @@
                         </c:forEach>
                         <b></b>
                         <font>
-                            <a href="javascript:void(0)" onclick="window.location.href='StuExamServlet?method=ing'" style="text-decoration:none;margin-left: 80px;">参加考试</a>
+                            <a href="javascript:void(0)" onclick="window.location.href='StuExamServlet?method=special&lessonuuid=${Newlessonlist_class.newlesson_uuid}'" style="text-decoration:none;margin-left: 80px;">参加考试</a>
                         </font>
                     </span>
             </li>
@@ -81,7 +81,7 @@
                         <b></b>
                         <font>
                             <a href="javascript:void(0)"  style="text-decoration:none"  onclick="window.location.href='ExitlessonServlet?lessonuuid=${Newlessonlist_other.newlesson_uuid}&studentid=${student.s_id}'">退出课程</a>
-                            <a href="javascript:void(0)" onclick="window.location.href='StuExamServlet?method=ing'"  style="text-decoration:none">参加考试</a>
+                            <a href="javascript:void(0)" onclick="window.location.href='StuExamServlet?method=special&lessonuuid=${Newlessonlist_other.newlesson_uuid}'"  style="text-decoration:none">参加考试</a>
                         </font>
                     </span>
             </li>

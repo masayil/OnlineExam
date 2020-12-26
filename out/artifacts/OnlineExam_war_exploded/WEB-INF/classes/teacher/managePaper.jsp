@@ -67,7 +67,8 @@
 <body>
 <jsp:useBean id="teacher" type="com.bean.entity.Teacher" scope="session"></jsp:useBean>
 <div style="text-align: center;padding-top: 30px;">
-    <h1>试卷管理</h1><button type="button" class="btn btn-primary" style="float: right;margin-right: 70px; width: 120px;height: 60px;" onclick="syalert.syopen('newpaper')">创建试卷</button>
+    <h1>试卷管理</h1><button type="button" class="btn btn-primary" style="float: right;margin-right: 70px; width: 120px;height: 60px;" onclick="window.location.href='ManMadePaperStepOne?mydepart=${teacher.t_department}'">手动创建试卷</button>
+    <button type="button" class="btn btn-primary" style="float: right;margin-right: 70px; width: 120px;height: 60px;" onclick="syalert.syopen('newpaper')">自动创建试卷</button>
 </div>
 <div class="sy-alert sy-alert-model animated" sy-enter="zoomIn" sy-leave="zoomOut" sy-type="confirm" sy-mask="true" id="newpaper">
     <div class="sy-title">新试卷</div>

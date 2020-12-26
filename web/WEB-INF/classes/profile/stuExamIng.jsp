@@ -29,9 +29,36 @@
     <div class="meal-title">
         <h1>进行中的考试：</h1>
     </div>
-    <div style="margin-left: 30px;"><h3>班级：</h3></div>
     <div class="meal-cut">
         <ul>
+            <c:forEach var="ExamAssignlist_special" items="${requestScope.ExamAssignlist_special}">
+                <li>
+                    <span>
+                        <img src="${pageContext.request.contextPath}/img/examlogo.png">
+                        <h3>考试：${ExamAssignlist_special.examAssign_name}</h3>
+                        <p>科目：
+                        <c:forEach var="newlesson_class" items="${requestScope.Newlessonlist_class}">
+                            <c:if test="${ExamAssignlist_special.lessonuuid eq newlesson_class.newlesson_uuid}">
+                                ${newlesson_class.newlesson_name}
+                            </c:if>
+                        </c:forEach>
+                                   <c:forEach var="newlesson_other" items="${requestScope.Newlessonlist_other}">
+                                       <c:if test="${ExamAssignlist_special.lessonuuid eq newlesson_other.newlesson_uuid}">
+                                           ${newlesson_other.newlesson_name}
+                                       </c:if>
+                                   </c:forEach>
+                        </p>
+                                <p>开始时间：${ExamAssignlist_special.startTime}</p>
+                        <p>结束时间：${ExamAssignlist_special.endTime}</p>
+                        <p>总分：${ExamAssignlist_special.totalscore}</p>
+                        <b></b>
+                        <font>
+                            <a href="javascript:void(0)" onclick="window.top.location.href='ComeToExamServlet?paperbaseuuid=${ExamAssignlist_special.paperbaseuuid}&start=${ExamAssignlist_special.startTime}&end=${ExamAssignlist_special.endTime}&examAssignuuid=${ExamAssignlist_special.examAssign_uuid}&lasttime=${ExamAssignlist_special.lasttime}&examname=${ExamAssignlist_special.examAssign_name}&totalscore=${ExamAssignlist_special.totalscore}'" style="text-decoration:none;margin-left: 80px;">开始考试</a>
+
+                        </font>
+                    </span>
+                </li>
+            </c:forEach>
             <c:forEach var="ExamAssignlist_class" items="${requestScope.ExamAssignlist_class}">
                 <li>
                     <span>
@@ -55,13 +82,6 @@
                     </span>
                 </li>
             </c:forEach>
-        </ul>
-
-    </div>
-    <hr style="height:1px;border:none;border-top:1px dashed #0066CC;">
-    <div style="margin-left: 30px;"><h3>其他：</h3></div>
-    <div class="meal-cut">
-        <ul>
             <c:forEach var="ExamAssignlist_other" items="${requestScope.ExamAssignlist_other}">
                 <li>
                     <span>
@@ -87,15 +107,11 @@
         </ul>
 
     </div>
-    <!--<ul class="pager">
-        <li><a href="#">上一页</a></li>
-        <li>&emsp;&emsp;</li>
-        <li>第X页</li>
-        <li>&emsp;&emsp;</li>
-        <li>共X页</li>
-        <li>&emsp;&emsp;</li>
-        <li><a href="#">下一页</a></li>
-    </ul>-->
+
+
+
+
+
 </div>
 <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/syalert/syalert.min.js"></script>

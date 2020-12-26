@@ -1,9 +1,6 @@
 package com.service.teacher;
 
-import com.bean.entity.Grade;
-import com.bean.entity.Paper;
-import com.bean.entity.QuestionBank;
-import com.bean.entity.Student;
+import com.bean.entity.*;
 import com.chart.BarChart_ByDatasetUtilities;
 import com.dao.teacher.CreateDao;
 import com.dao.teacher.FindDao;
@@ -178,4 +175,8 @@ public class CreateService {
         return CreateDao.getNoGradeListDao(con, lessonuuid, sql1, sql2);
     }
 
+    public static ArrayList<Course> getcourseslist_madePaperService(Connection con, String mydepart) {
+        String sql="select * from course where course_creator=?";
+        return CreateDao.getcourseslist_madePaperDao(con,mydepart,sql);
+    }
 }

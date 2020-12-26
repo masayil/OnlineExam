@@ -29,7 +29,6 @@
     <div class="meal-title">
         <h1>已完成的考试：</h1>
     </div>
-    <div style="margin-left: 30px;"><h3>班级：</h3></div>
     <div class="meal-cut">
         <ul>
             <c:forEach var="ExamAssignlist_class" items="${requestScope.ExamAssignlist_class}">
@@ -74,13 +73,6 @@
                     </span>
                 </li>
             </c:forEach>
-        </ul>
-
-    </div>
-    <hr style="height:1px;border:none;border-top:1px dashed #0066CC;">
-    <div style="margin-left: 30px;"><h3>其他：</h3></div>
-    <div class="meal-cut">
-        <ul>
             <c:forEach var="ExamAssignlist_other" items="${requestScope.ExamAssignlist_other}">
                 <li>
                     <span>
@@ -127,15 +119,7 @@
         </ul>
 
     </div>
-    <!--<ul class="pager">
-        <li><a href="#">上一页</a></li>
-        <li>&emsp;&emsp;</li>
-        <li>第X页</li>
-        <li>&emsp;&emsp;</li>
-        <li>共X页</li>
-        <li>&emsp;&emsp;</li>
-        <li><a href="#">下一页</a></li>
-    </ul>-->
+
 </div>
 <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/syalert/syalert.min.js"></script>

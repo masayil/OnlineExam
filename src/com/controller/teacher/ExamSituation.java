@@ -53,11 +53,20 @@ public class ExamSituation extends HttpServlet {
             }
             dbpool.close(con);
             String imgName = BarChart_ByDatasetUtilities.generateBarChart(session,data);
+            double average=0;
+            double totalscore=0;
+            for(int i=0;i<gradeslist.size();i++){
+                totalscore+=gradeslist.get(i).getTotal();
+            }
+            average=totalscore/gradeslist.size();
             request.setAttribute("imgName",imgName);
             request.setAttribute("gradeslist",gradeslist);
             request.setAttribute("examname",examname);
             request.setAttribute("student_list",student_list);
             request.setAttribute("wantnoGrade",wantnoGrade);
+            request.setAttribute("average",average);
+            request.setAttribute("examuuid",examuuid);
+            request.setAttribute("lessonuuid",lessonuuid);
             request.getRequestDispatcher("./teacher/ExamSituation.jsp").forward(request, response);
         }
     }

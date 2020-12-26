@@ -350,13 +350,13 @@ public class FindDao {
     public static ArrayList<PaperBase> prepareExamDao(Connection con,String thiscourse,String sql){
         PreparedStatement ps = null;
         ResultSet rs = null;
-        PaperBase paperBase=new PaperBase();
         ArrayList<PaperBase> paperBaseArrayList=new ArrayList<PaperBase>();
         try{
             ps=con.prepareStatement(sql);
             ps.setString(1,thiscourse);
             rs=ps.executeQuery();
             while (rs.next()){
+                PaperBase paperBase=new PaperBase();
                 String paperbase_name=rs.getString("paperbase_name");
                 String paperbase_uuid=rs.getString("paperbase_uuid");
                 if(paperbase_name!=null&&paperbase_uuid!=null){

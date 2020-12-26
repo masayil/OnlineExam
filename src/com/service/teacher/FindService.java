@@ -112,7 +112,7 @@ public class FindService {
         try{
             examAssigns=CreateDao.getTExamAssignlistDao(newlessonuuid,sql,con);
             for (int i=0;i<examAssigns.size();i++){
-                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date d1 = df.parse(examAssigns.get(i).getStartTime());
                 Date d2 = df.parse(examAssigns.get(i).getEndTime());
                 Date d3 = df.parse(gettime);
@@ -146,7 +146,7 @@ public class FindService {
         try{
             examAssigns=CreateDao.getTExamAssignlistDao(newlessonuuid,sql,con);
             for (int i=0;i<examAssigns.size();i++){
-                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date d1 = df.parse(examAssigns.get(i).getStartTime());
                 Date d2 = df.parse(examAssigns.get(i).getEndTime());
                 Date d3 = df.parse(gettime);
@@ -180,7 +180,7 @@ public class FindService {
             newlessonuuid[i]=newlesson.getNewlesson_uuid();
         }
         String sql1="select * from examAssign where lessonuuid=? order by examAssign_createDate desc";
-        String sql2="select distinct examAssignuuid from grade where examAssignuuid=? and total>=0";
+        String sql2="select distinct examAssignuuid from grade where examAssignuuid=? and total=-1";
         ArrayList<String> result;
         ArrayList<ExamAssign> examAssigns;
         ArrayList<ExamAssign> examAssign_next=new ArrayList<>();
@@ -188,7 +188,7 @@ public class FindService {
         try{
             examAssigns=CreateDao.getTExamAssignlistDao(newlessonuuid,sql1,con);
             for (int i=0;i<examAssigns.size();i++){
-                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date d1 = df.parse(examAssigns.get(i).getStartTime());
                 Date d2 = df.parse(examAssigns.get(i).getEndTime());
                 Date d3 = df.parse(gettime);
@@ -205,13 +205,14 @@ public class FindService {
             for(int i=0;i<result.size();i++){
                 for(int j=0;j<examAssign_next.size();j++){
                     if(result.get(i).equals(examAssign_next.get(j).getExamAssign_uuid())){
-                        examAssign_done.add(examAssign_next.get(j));
+                        examAssign_next.remove(examAssign_next.get(j));
+                        break;
                     }
                 }
             }
         }catch (SQLException | ParseException throwables) {
             throwables.printStackTrace();
         }
-        return examAssign_done;
+        return examAssign_next;
     }
 }

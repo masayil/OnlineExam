@@ -33,7 +33,7 @@ public class ComeToExamServlet extends HttpServlet {
         String start = request.getParameter("start");
         String end = request.getParameter("end");
         String examAssignuuid = request.getParameter("examAssignuuid");
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date now = new Date();
         Date d1 = new Date();
         Date d2 = new Date();

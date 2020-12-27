@@ -31,9 +31,9 @@ public class ManMadePaperStepOne extends HttpServlet {
         }else {
             String mydepart=request.getParameter("mydepart");
             ArrayList<Course> courseslist_madePaper= CreateService.getcourseslist_madePaperService(con,mydepart);
-            request.setAttribute("courseslist_madePaper",courseslist_madePaper);
-            request.getRequestDispatcher("./admin/ManMadePaperStepOne.jsp").forward(request,response);
             dbpool.close(con);
+            request.setAttribute("courseslist_madePaper",courseslist_madePaper);
+            request.getRequestDispatcher("./teacher/ManMadePaperStepOne.jsp").forward(request,response);
         }
     }
 }

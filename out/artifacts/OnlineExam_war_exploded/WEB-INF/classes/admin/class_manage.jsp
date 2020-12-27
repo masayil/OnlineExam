@@ -46,45 +46,23 @@
 </div>
 <ul>
     <li><a href="javascript:void(0)" onclick="displayno1()">
-        <cite>学院1</cite></a>&emsp;&emsp;<button type="button" class="btn btn-primary btn-sm" onclick="addclass('学院1')">增加班级</button>
+        <cite>信息技术学院</cite></a>&emsp;&emsp;<button type="button" class="btn btn-primary btn-sm" onclick="addclass('信息技术学院')">增加班级</button>
         <ul id="no1" style="display: none;">
             <li>        <c:forEach var="majorclass_list_admin" items="${requestScope.majorclass_list_admin}">
-                <c:if test="${majorclass_list_admin.department eq '学院1'}">
-                    <button type="button" class="btn btn-link" style="color: darkgoldenrod;font-size: 18px;">${majorclass_list_admin.class_1}</button>
-                    <button type="button" class="btn btn-danger" onclick="removeclass('${majorclass_list_admin.class_1}')">删除</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</c:if>
+                <c:if test="${majorclass_list_admin.department eq '信息技术学院'}">
+                    <button type="button" class="btn btn-link" style="color: darkgoldenrod;font-size: 18px;">${majorclass_list_admin.major}-${majorclass_list_admin.class_1}</button>
+                    <button type="button" class="btn btn-danger" onclick="removeclass('${majorclass_list_admin.class_1}')">删除</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</c:if>
             </c:forEach></li>
         </ul>
     </li>
     <hr>
     <li><a href="javascript:void(0)" onclick="displayno2()">
-        <cite>学院2</cite></a>&emsp;&emsp;<button type="button" class="btn btn-primary btn-sm" onclick="addclass('学院2')">增加班级</button>
+        <cite>通识教育学院</cite></a>&emsp;&emsp;<button type="button" class="btn btn-primary btn-sm" onclick="addclass('通识教育学院')">增加班级</button>
         <ul id="no2" style="display: none;">
             <li>        <c:forEach var="majorclass_list_admin" items="${requestScope.majorclass_list_admin}">
-                <c:if test="${majorclass_list_admin.department eq '学院2'}">
-                    <button type="button" class="btn btn-link" style="color: darkgoldenrod;font-size: 18px;">${majorclass_list_admin.class_1}</button>
-                    <button type="button" class="btn btn-danger" onclick="removeclass('${majorclass_list_admin.class_1}')">删除</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</c:if>
-            </c:forEach></li>
-        </ul>
-    </li>
-    <hr>
-    <li><a href="javascript:void(0)" onclick="displayno3()">
-        <cite>学院3</cite></a>&emsp;&emsp;<button type="button" class="btn btn-primary btn-sm" onclick="addclass('学院3')">增加班级</button>
-        <ul id="no3" style="display: none;">
-            <li>        <c:forEach var="majorclass_list_admin" items="${requestScope.majorclass_list_admin}">
-                <c:if test="${majorclass_list_admin.department eq '学院3'}">
-                    <button type="button" class="btn btn-link" style="color: darkgoldenrod;font-size: 18px;">${majorclass_list_admin.class_1}</button>
-                    <button type="button" class="btn btn-danger" onclick="removeclass('${majorclass_list_admin.class_1}')">删除</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</c:if>
-            </c:forEach></li>
-        </ul>
-    </li>
-    <hr>
-    <li><a href="javascript:void(0)" onclick="displayno4()">
-        <cite>学院4</cite></a>&emsp;&emsp;<button type="button" class="btn btn-primary btn-sm" onclick="addclass('学院4')">增加班级</button>
-        <ul id="no4" style="display: none;">
-            <li>        <c:forEach var="majorclass_list_admin" items="${requestScope.majorclass_list_admin}">
-                <c:if test="${majorclass_list_admin.department eq '学院4'}">
-                    <button type="button" class="btn btn-link" style="color: darkgoldenrod;font-size: 18px;">${majorclass_list_admin.class_1}</button>
-                <button type="button" class="btn btn-danger" onclick="removeclass('${majorclass_list_admin.class_1}')">删除</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</c:if>
+                <c:if test="${majorclass_list_admin.department eq '通识教育学院'}">
+                    <button type="button" class="btn btn-link" style="color: darkgoldenrod;font-size: 18px;">${majorclass_list_admin.major}-${majorclass_list_admin.class_1}</button>
+                    <button type="button" class="btn btn-danger" onclick="removeclass('${majorclass_list_admin.class_1}')">删除</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</c:if>
             </c:forEach></li>
         </ul>
     </li>
@@ -104,20 +82,6 @@
             document.getElementById("no2").style.display="block";
         }else {
             document.getElementById("no2").style.display="none";
-        }
-    }
-    function displayno3() {
-        if(document.getElementById("no3").style.display==="none"){
-            document.getElementById("no3").style.display="block";
-        }else {
-            document.getElementById("no3").style.display="none";
-        }
-    }
-    function displayno4() {
-        if(document.getElementById("no4").style.display==="none"){
-            document.getElementById("no4").style.display="block";
-        }else {
-            document.getElementById("no4").style.display="none";
         }
     }
     function removeclass(chosenclass) {

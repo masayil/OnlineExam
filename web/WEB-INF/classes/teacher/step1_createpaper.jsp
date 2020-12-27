@@ -39,9 +39,10 @@
     <div class="form-group">
         单选题：
     <select style="width: 100px; height: 30px;" id="danxuan" name="danxuan">
+        <option value="0" selected>0</option>
         <%
     int type1=(int)request.getAttribute("type1");
-    for(int i=0;i<=type1;i++){
+    for(int i=1;i<=type1;i++){
     %>
         <option value="<%=i%>"><%=i%></option>
         <%
@@ -58,9 +59,10 @@
     <div class="form-group">
         多选题：
         <select style="width: 100px; height: 30px;" id="duoxuan" name="duoxuan">
+            <option value="0" selected>0</option>
             <%
                 int type2=(int)request.getAttribute("type2");
-                for(int i=0;i<=type2;i++){
+                for(int i=1;i<=type2;i++){
             %>
             <option value="<%=i%>"><%=i%></option>
             <%
@@ -77,9 +79,10 @@
     <div class="form-group">
         判断题：
         <select style="width: 100px; height: 30px;" id="panduan" name="panduan">
+            <option value="0" selected>0</option>
             <%
                 int type3=(int)request.getAttribute("type3");
-                for(int i=0;i<=type3;i++){
+                for(int i=1;i<=type3;i++){
             %>
             <option value="<%=i%>"><%=i%></option>
             <%
@@ -96,9 +99,10 @@
     <div class="form-group">
         简答题：
         <select style="width: 100px; height: 30px;" id="jianda" name="jianda">
+            <option value="0" selected>0</option>
             <%
                 int type4=(int)request.getAttribute("type4");
-                for(int i=0;i<=type4;i++){
+                for(int i=1;i<=type4;i++){
             %>
             <option value="<%=i%>"><%=i%></option>
             <%

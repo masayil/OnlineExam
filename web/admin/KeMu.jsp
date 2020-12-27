@@ -45,45 +45,23 @@
 </div>
 <ul>
     <li><a href="javascript:void(0)" onclick="displayno1()">
-        <cite>学院1</cite></a>&emsp;&emsp;<button type="button" class="btn btn-primary btn-sm" onclick="addkemu('学院1')">增加科目</button>
+        <cite>信息技术学院</cite></a>&emsp;&emsp;<button type="button" class="btn btn-primary btn-sm" onclick="addkemu('信息技术学院')">增加科目</button>
         <ul id="no1" style="display: none;">
             <li>        <c:forEach var="courses_list" items="${requestScope.courses_list}">
-                <c:if test="${courses_list.course_creator eq '学院1'}">
+                <c:if test="${courses_list.course_creator eq '信息技术学院'}">
                     <button type="button" class="btn btn-link" style="color: darkgoldenrod;font-size: 18px;">${courses_list.course_name}</button>
-                    <button type="button" class="btn btn-danger" onclick="removekemu('${courses_list.course_name}')">删除</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</c:if>
+                    <button type="button" class="btn btn-danger" onclick="removekemu('${courses_list.course_name}')">删除</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</c:if>
             </c:forEach></li>
         </ul>
     </li>
     <hr>
     <li><a href="javascript:void(0)" onclick="displayno2()">
-        <cite>学院2</cite></a>&emsp;&emsp;<button type="button" class="btn btn-primary btn-sm" onclick="addkemu('学院2')">增加科目</button>
+        <cite>通识教育学院</cite></a>&emsp;&emsp;<button type="button" class="btn btn-primary btn-sm" onclick="addkemu('通识教育学院')">增加科目</button>
         <ul id="no2" style="display: none;">
             <li>        <c:forEach var="courses_list" items="${requestScope.courses_list}">
-                <c:if test="${courses_list.course_creator eq '学院2'}">
+                <c:if test="${courses_list.course_creator eq '通识教育学院'}">
                     <button type="button" class="btn btn-link" style="color: darkgoldenrod;font-size: 18px;">${courses_list.course_name}</button>
-                    <button type="button" class="btn btn-danger" onclick="removekemu('${courses_list.course_name}')">删除</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</c:if>
-            </c:forEach></li>
-        </ul>
-    </li>
-    <hr>
-    <li><a href="javascript:void(0)" onclick="displayno3()">
-        <cite>学院3</cite></a>&emsp;&emsp;<button type="button" class="btn btn-primary btn-sm" onclick="addkemu('学院3')">增加科目</button>
-        <ul id="no3" style="display: none;">
-            <li>        <c:forEach var="courses_list" items="${requestScope.courses_list}">
-                <c:if test="${courses_list.course_creator eq '学院3'}">
-                    <button type="button" class="btn btn-link" style="color: darkgoldenrod;font-size: 18px;">${courses_list.course_name}</button>
-                    <button type="button" class="btn btn-danger" onclick="removekemu('${courses_list.course_name}')">删除</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</c:if>
-            </c:forEach></li>
-        </ul>
-    </li>
-    <hr>
-    <li><a href="javascript:void(0)" onclick="displayno4()">
-        <cite>学院4</cite></a>&emsp;&emsp;<button type="button" class="btn btn-primary btn-sm" onclick="addkemu('学院4')">增加科目</button>
-        <ul id="no4" style="display: none;">
-            <li>        <c:forEach var="courses_list" items="${requestScope.courses_list}">
-                <c:if test="${courses_list.course_creator eq '学院4'}">
-                    <button type="button" class="btn btn-link" style="color: darkgoldenrod;font-size: 18px;">${courses_list.course_name}</button>
-                    <button type="button" class="btn btn-danger" onclick="removekemu('${courses_list.course_name}')">删除</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</c:if>
+                    <button type="button" class="btn btn-danger" onclick="removekemu('${courses_list.course_name}')">删除</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</c:if>
             </c:forEach></li>
         </ul>
     </li>
@@ -105,32 +83,18 @@
             document.getElementById("no2").style.display="none";
         }
     }
-    function displayno3() {
-        if(document.getElementById("no3").style.display==="none"){
-            document.getElementById("no3").style.display="block";
-        }else {
-            document.getElementById("no3").style.display="none";
-        }
-    }
-    function displayno4() {
-        if(document.getElementById("no4").style.display==="none"){
-            document.getElementById("no4").style.display="block";
-        }else {
-            document.getElementById("no4").style.display="none";
-        }
-    }
-    function removekemu(chosenclass) {
+    function removekemu(chosencourse) {
         if(confirm("是否确认删除？")){
             $.ajax({
-                url:"RemoveClassAdmin",
+                url:"RemovekemuAdmin",
                 type:"post",
                 dataType:"text",
                 data:{
-                    chosenclass:chosenclass
+                    chosencourse:chosencourse
                 },
                 success:function (flag) {
                     if(flag==="yes"){
-                        alert("班级删除成功");
+                        alert("科目删除成功");
                         location.reload();
                     }else if(flag==="no"){
                         alert("请再试一次");
@@ -146,7 +110,7 @@
         }
     }
     function addkemu(depart) {
-        window.location.href="./admin/addclasspage.jsp?depart="+depart;
+        window.location.href="./admin/addkemupage.jsp?depart="+depart;
     }
 </script>
 </body>

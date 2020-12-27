@@ -45,37 +45,19 @@
 </div>
 <ul>
     <li><a href="javascript:void(0)" onclick="displayno1()">
-        <cite>学院1</cite></a>
+        <cite>信息技术学院</cite></a>
         <ul id="no1" style="display: none;">
             <li>        <c:forEach var="teachers" items="${requestScope.teachers_admin}">
-                <c:if test="${teachers.t_department eq '学院1'}">
+                <c:if test="${teachers.t_department eq '信息技术学院'}">
                     <button type="button" class="btn btn-link" style="color: darkgoldenrod;font-size: 18px;" onclick="gotoCourse('${teachers.t_id}')">${teachers.t_id}-${teachers.t_name}</button></c:if>
             </c:forEach></li>
         </ul>
     </li>
     <li><a href="javascript:void(0)" onclick="displayno2()">
-        <cite>学院2</cite></a>
+        <cite>通识教育学院</cite></a>
         <ul id="no2" style="display: none;">
             <li>        <c:forEach var="teachers" items="${requestScope.teachers_admin}">
-                <c:if test="${teachers.t_department eq '学院2'}">
-                    <button type="button" class="btn btn-link" style="color: darkgoldenrod;font-size: 18px;" onclick="gotoCourse('${teachers.t_id}')">${teachers.t_id}-${teachers.t_name}</button></c:if>
-            </c:forEach></li>
-        </ul>
-    </li>
-    <li><a href="javascript:void(0)" onclick="displayno3()">
-        <cite>学院3</cite></a>
-        <ul id="no3" style="display: none;">
-            <li>        <c:forEach var="teachers" items="${requestScope.teachers_admin}">
-                <c:if test="${teachers.t_department eq '学院3'}">
-                    <button type="button" class="btn btn-link" style="color: darkgoldenrod;font-size: 18px;" onclick="gotoCourse('${teachers.t_id}')">${teachers.t_id}-${teachers.t_name}</button></c:if>
-            </c:forEach></li>
-        </ul>
-    </li>
-    <li><a href="javascript:void(0)" onclick="displayno4()">
-        <cite>学院4</cite></a>
-        <ul id="no4" style="display: none;">
-            <li>        <c:forEach var="teachers" items="${requestScope.teachers_admin}">
-                <c:if test="${teachers.t_department eq '学院4'}">
+                <c:if test="${teachers.t_department eq '通识教育学院'}">
                     <button type="button" class="btn btn-link" style="color: darkgoldenrod;font-size: 18px;" onclick="gotoCourse('${teachers.t_id}')">${teachers.t_id}-${teachers.t_name}</button></c:if>
             </c:forEach></li>
         </ul>
@@ -96,20 +78,6 @@
             document.getElementById("no2").style.display="block";
         }else {
             document.getElementById("no2").style.display="none";
-        }
-    }
-    function displayno3() {
-        if(document.getElementById("no3").style.display==="none"){
-            document.getElementById("no3").style.display="block";
-        }else {
-            document.getElementById("no3").style.display="none";
-        }
-    }
-    function displayno4() {
-        if(document.getElementById("no4").style.display==="none"){
-            document.getElementById("no4").style.display="block";
-        }else {
-            document.getElementById("no4").style.display="none";
         }
     }
     function gotoCourse(t_id) {

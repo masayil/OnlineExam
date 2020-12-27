@@ -45,4 +45,14 @@ public class UpdateService {
         String sql="delete from student where s_id=?";
         return UpdateDao.deleteTeaAndStuDao(con,studentid,sql);
     }
+
+    public static boolean addcourseService(Connection con, String depart, String course) {
+        String sql="insert into course values (?,?)";
+        return UpdateDao.addcourseDao(con,depart,course,sql);
+    }
+
+    public static boolean RemovekemuAdminService(Connection con, String chosencourse) {
+        String sql="delete from course where course_name=?";
+        return UpdateDao.RemovekemuAdminDao(con,chosencourse,sql);
+    }
 }

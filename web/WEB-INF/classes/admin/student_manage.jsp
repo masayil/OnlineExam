@@ -64,25 +64,17 @@
                     <div class="form-group">
                         学&emsp;院：<select style="width: 250px;" id="departmentselect">
                         <option value="全部" selected>全部</option>
-                        <option value="学院1">学院1</option>
-                        <option value="学院2">学院2</option>
-                        <option value="学院3">学院3</option>
-                        <option value="学院4">学院4</option>
+                        <option value="信息技术学院">信息技术学院</option>
+                        <option value="通识教育学院">通识教育学院</option>
                     </select>&emsp;&emsp;
                         班级：<select id="classselect">
                             <option class="all" value="全部" selected>全部</option>
                             <c:forEach var="majorclass_list_admin" items="${requestScope.majorclass_list_admin}">
-                                <c:if test="${majorclass_list_admin.department eq '学院1'}">
+                                <c:if test="${majorclass_list_admin.department eq '信息技术学院'}">
                                     <option class="no1" value=${majorclass_list_admin.class_1}>${majorclass_list_admin.class_1}</option>
                                 </c:if>
-                                <c:if test="${majorclass_list_admin.department eq '学院2'}">
+                                <c:if test="${majorclass_list_admin.department eq '通识教育学院'}">
                                     <option class="no2" value=${majorclass_list_admin.class_1}>${majorclass_list_admin.class_1}</option>
-                                </c:if>
-                                <c:if test="${majorclass_list_admin.department eq '学院3'}">
-                                    <option class="no3" value=${majorclass_list_admin.class_1}>${majorclass_list_admin.class_1}</option>
-                                </c:if>
-                                <c:if test="${majorclass_list_admin.department eq '学院4'}">
-                                    <option class="no4" value=${majorclass_list_admin.class_1}>${majorclass_list_admin.class_1}</option>
                                 </c:if>
                             </c:forEach>
                         </select>
@@ -114,36 +106,16 @@ $(function () {
             $(".all").css("display","block");
             $(".no1").css("display","none");
             $(".no2").css("display","none");
-            $(".no3").css("display","none");
-            $(".no4").css("display","none");
-        }else if(document.getElementById("departmentselect").value==="学院1"){
+        }else if(document.getElementById("departmentselect").value==="信息技术学院"){
             document.getElementById("classselect").value="全部";
             $(".all").css("display","block");
             $(".no1").css("display","block");
             $(".no2").css("display","none");
-            $(".no3").css("display","none");
-            $(".no4").css("display","none");
-        }else if(document.getElementById("departmentselect").value==="学院2"){
+        }else if(document.getElementById("departmentselect").value==="通识教育学院"){
             document.getElementById("classselect").value="全部";
             $(".all").css("display","block");
             $(".no1").css("display","none");
             $(".no2").css("display","block");
-            $(".no3").css("display","none");
-            $(".no4").css("display","none");
-        }else if(document.getElementById("departmentselect").value==="学院3"){
-            document.getElementById("classselect").value="全部";
-            $(".all").css("display","block");
-            $(".no1").css("display","none");
-            $(".no2").css("display","none");
-            $(".no3").css("display","block");
-            $(".no4").css("display","none");
-        }else if(document.getElementById("departmentselect").value==="学院4"){
-            document.getElementById("classselect").value="全部";
-            $(".all").css("display","block");
-            $(".no1").css("display","none");
-            $(".no2").css("display","none");
-            $(".no3").css("display","none");
-            $(".no4").css("display","block");
         }
     });
 });

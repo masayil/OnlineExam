@@ -376,4 +376,115 @@ public class CreateDao {
         }
         return courseArrayList;
     }
+
+    public static ArrayList<QuestionBank> getQuestionBanks_manmadeDao(Connection con, String course, String sql) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        QuestionBank questionBank=null;
+        ArrayList<QuestionBank> questionBankArrayList=new ArrayList<>();
+        try{
+            ps=con.prepareStatement(sql);
+            ps.setString(1,course);
+            rs=ps.executeQuery();
+            while (rs.next()){
+                long questionBank_serialNumber=rs.getLong("questionBank_serialNumber");
+                String questionBank_creatorID=rs.getString("questionBank_creatorID");
+                String questionBank_course=rs.getString("questionBank_course");
+                String questionBank_createDate=rs.getString("questionBank_createDate");
+                String questionBank_point=rs.getString("questionBank_point");
+                int questionBank_type=rs.getInt("questionBank_type");
+                String questionBank_title=rs.getString("questionBank_title");
+                String questionBank_titleimage=rs.getString("questionBank_titleimage");
+                String questionBank_option1=rs.getString("questionBank_option1");
+                String questionBank_option2=rs.getString("questionBank_option2");
+                String questionBank_option3=rs.getString("questionBank_option3");
+                String questionBank_option4=rs.getString("questionBank_option4");
+                String questionBank_answer=rs.getString("questionBank_answer");
+                questionBank=new QuestionBank(questionBank_serialNumber,questionBank_creatorID,questionBank_course,
+                        questionBank_createDate,questionBank_point,questionBank_type,questionBank_title,questionBank_titleimage,
+                        questionBank_option1,questionBank_option2,questionBank_option3,questionBank_option4,
+                        questionBank_answer);
+                questionBankArrayList.add(questionBank);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        finally {
+            Pool.closeDBResource(rs,ps);
+        }
+        return questionBankArrayList;
+    }
+
+    public static ArrayList<Teacher> getteachers_manmadeDao(Connection con, String sql) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Teacher teacher=null;
+        ArrayList<Teacher> teacherArrayList=new ArrayList<Teacher>();
+        try{
+            ps=con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while (rs.next()){
+                int t_serialNumber=rs.getInt("t_serialNumber");
+                String t_id=rs.getString("t_id");
+                String t_name=rs.getString("t_name");
+                String t_password=rs.getString("t_password");
+                String t_sex=rs.getString("t_sex");
+                String t_college=rs.getString("t_college");
+                String t_department=rs.getString("t_department");
+                teacher=new Teacher(t_serialNumber,t_id,t_name,t_password,t_sex,t_college,t_department);
+                teacherArrayList.add(teacher);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            Pool.closeDBResource(rs,ps);
+        }
+        return teacherArrayList;
+    }
+
+    public static void createManMadeDao(Connection con,String sql,String sql2, String paperuuid,
+                                        String papername, String createdate, String xuhao, String fenshu,String t_id) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try{
+            ps=con.prepareStatement(sql);
+            ps.setLong(1,Long.parseLong(xuhao));
+            rs=ps.executeQuery();
+            if(rs.next()){
+                long questionBank_serialNumber=rs.getLong("questionBank_serialNumber");
+                String questionBank_creatorID=rs.getString("questionBank_creatorID");
+                String questionBank_course=rs.getString("questionBank_course");
+                String questionBank_createDate=rs.getString("questionBank_createDate");
+                String questionBank_point=rs.getString("questionBank_point");
+                int questionBank_type=rs.getInt("questionBank_type");
+                String questionBank_title=rs.getString("questionBank_title");
+                String questionBank_titleimage=rs.getString("questionBank_titleimage");
+                String questionBank_option1=rs.getString("questionBank_option1");
+                String questionBank_option2=rs.getString("questionBank_option2");
+                String questionBank_option3=rs.getString("questionBank_option3");
+                String questionBank_option4=rs.getString("questionBank_option4");
+                String questionBank_answer=rs.getString("questionBank_answer");
+                ps=con.prepareStatement(sql2);
+                ps.setString(1,papername);
+                ps.setString(2,paperuuid);
+                ps.setString(3,t_id);
+                ps.setString(4,createdate);
+                ps.setString(5,questionBank_course);
+                ps.setInt(6,questionBank_type);
+                ps.setString(7,questionBank_title);
+                ps.setString(8,questionBank_titleimage);
+                ps.setString(9,questionBank_option1);
+                ps.setString(10,questionBank_option2);
+                ps.setString(11,questionBank_option3);
+                ps.setString(12,questionBank_option4);
+                ps.setString(13,questionBank_answer);
+                ps.setDouble(14,Double.parseDouble(fenshu));
+                int i=ps.executeUpdate();
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            Pool.closeDBResource(rs,ps);
+        }
+    }
 }

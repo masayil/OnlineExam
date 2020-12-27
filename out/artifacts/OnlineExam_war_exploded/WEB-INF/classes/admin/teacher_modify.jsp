@@ -80,30 +80,14 @@
                         <label>学院</label>
                         <div class="ydc-reg-form-input">
                             <label><select id="departselect" style="width: 150px;"><c:choose>
-                                <c:when test="${thisteacher.t_department eq '学院1'}">
-                                    <option value="学院1" selected>学院1</option>
-                                    <option value="学院2">学院2</option>
-                                    <option value="学院3">学院3</option>
-                                    <option value="学院4">学院4</option>
+                                <c:when test="${thisteacher.t_department eq '信息技术学院'}">
+                                    <option value="信息技术学院" selected>信息技术学院</option>
+                                    <option value="通识教育学院">通识教育学院</option>
                                 </c:when>
-                                <c:when test="${thisteacher.t_department eq '学院2'}">
-                                    <option value="学院1">学院1</option>
-                                    <option value="学院2" selected>学院2</option>
-                                    <option value="学院3">学院3</option>
-                                    <option value="学院4">学院4</option>
+                                <c:when test="${thisteacher.t_department eq '通识教育学院'}">
+                                    <option value="信息技术学院">信息技术学院</option>
+                                    <option value="通识教育学院" selected>通识教育学院</option>
                                 </c:when>
-                                <c:when test="${thisteacher.t_department eq '学院3'}">
-                                    <option value="学院1">学院1</option>
-                                    <option value="学院2">学院2</option>
-                                    <option value="学院3" selected>学院3</option>
-                                    <option value="学院4">学院4</option>
-                                </c:when>
-                                <c:otherwise>
-                                    <option value="学院1">学院1</option>
-                                    <option value="学院2">学院2</option>
-                                    <option value="学院3">学院3</option>
-                                    <option value="学院4" selected>学院4</option>
-                                </c:otherwise>
                             </c:choose></select></label>
                         </div>
                     </div>

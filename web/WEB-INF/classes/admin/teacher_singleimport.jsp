@@ -65,10 +65,8 @@
     <div class="form-group">
         <label class="sr-only" for="depart">院系</label>
         院&emsp;系：<select id="depart" name="depart" style="width: 200px;height: 30px;">
-        <option value="学院1" selected>学院1</option>
-        <option value="学院2">学院2</option>
-        <option value="学院3">学院3</option>
-        <option value="学院4">学院4</option>
+        <option value="信息技术学院" selected>信息技术学院</option>
+        <option value="通识教育学院">通识教育学院</option>
     </select>
     </div>
     <br>

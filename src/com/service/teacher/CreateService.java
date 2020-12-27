@@ -39,7 +39,7 @@ public class CreateService {
         }
         if(!(jianda == 0 || score4 == 0.0||score4==0)){
             ArrayList<QuestionBank> banklist4=map1.get("jianda");
-            createPaperBase(banklist4,teacherid,panduan,score4,this_paperBaseuuid,createTime,papername,
+            createPaperBase(banklist4,teacherid,jianda,score4,this_paperBaseuuid,createTime,papername,
                     thiscourse,con);
         }
         return true;
@@ -178,5 +178,44 @@ public class CreateService {
     public static ArrayList<Course> getcourseslist_madePaperService(Connection con, String mydepart) {
         String sql="select * from course where course_creator=?";
         return CreateDao.getcourseslist_madePaperDao(con,mydepart,sql);
+    }
+
+    public static ArrayList<QuestionBank> getQuestionBanks_manmadeService(Connection con, String course) {
+        String sql="select * from questionBank where questionBank_course=? order by questionBank_creatorID,questionBank_type,questionBank_point";
+        return CreateDao.getQuestionBanks_manmadeDao(con,course,sql);
+    }
+
+    public static ArrayList<Teacher> getteachers_manmadeService(Connection con) {
+        String sql="select * from teacher";
+        return CreateDao.getteachers_manmadeDao(con,sql);
+    }
+
+    public static boolean createManMadePaper(Connection con, String[] danxuan, String[] danxuanscore, String[] duoxuan,
+                                             String[] duoxuanscore, String[] panduan,
+                                             String[] panduanscore, String[] jianda, String[] jiandascore,
+                                             String t_id,String papername) {
+        String paperuuid=Generateuuid.getuuid();
+        String createdate=Generatetime.gettime();
+        for(int i=0;i<danxuan.length;i++){
+            String sql="select * from questionBank where questionBank_serialNumber=?";
+            String sql2="insert into paperbase values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            CreateDao.createManMadeDao(con,sql,sql2,paperuuid,papername,createdate,danxuan[i],danxuanscore[i],t_id);
+        }
+        for(int i=0;i<duoxuan.length;i++){
+            String sql="select * from questionBank where questionBank_serialNumber=?";
+            String sql2="insert into paperbase values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            CreateDao.createManMadeDao(con,sql,sql2,paperuuid,papername,createdate,duoxuan[i],duoxuanscore[i],t_id);
+        }
+        for(int i=0;i<panduan.length;i++){
+            String sql="select * from questionBank where questionBank_serialNumber=?";
+            String sql2="insert into paperbase values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            CreateDao.createManMadeDao(con,sql,sql2,paperuuid,papername,createdate,panduan[i],panduanscore[i],t_id);
+        }
+        for(int i=0;i<jianda.length;i++){
+            String sql="select * from questionBank where questionBank_serialNumber=?";
+            String sql2="insert into paperbase values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            CreateDao.createManMadeDao(con,sql,sql2,paperuuid,papername,createdate,jianda[i],jiandascore[i],t_id);
+        }
+        return true;
     }
 }

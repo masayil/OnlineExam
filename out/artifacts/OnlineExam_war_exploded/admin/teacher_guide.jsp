@@ -52,10 +52,8 @@
                     <div class="form-group">
                         学&emsp;院：<select style="width: 250px;" id="departmentselect">
                         <option value="全部">全部</option>
-                        <option value="学院1">学院1</option>
-                        <option value="学院2">学院2</option>
-                        <option value="学院3">学院3</option>
-                        <option value="学院4">学院4</option>
+                        <option value="信息技术学院">信息技术学院</option>
+                        <option value="通识教育学院">通识教育学院</option>
                     </select>
                     </div>&emsp;&emsp;
                     <button type="button" class="btn btn-warning" style="width: 90px;" onclick="browserDepart()">检索</button>

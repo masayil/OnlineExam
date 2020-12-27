@@ -122,4 +122,39 @@ public class UpdateDao {
         }
         return false;
     }
+
+    public static boolean addcourseDao(Connection con, String depart, String course, String sql) {
+        PreparedStatement ps = null;
+        try{
+            ps=con.prepareStatement(sql);
+            ps.setString(1,course);
+            ps.setString(2,depart);
+            int i=ps.executeUpdate();
+            if(i==1){
+                return true;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            Pool.close(ps);
+        }
+        return false;
+    }
+
+    public static boolean RemovekemuAdminDao(Connection con, String chosencourse, String sql) {
+        PreparedStatement ps = null;
+        try{
+            ps=con.prepareStatement(sql);
+            ps.setString(1,chosencourse);
+            int i=ps.executeUpdate();
+            if(i==1){
+                return true;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            Pool.close(ps);
+        }
+        return false;
+    }
 }

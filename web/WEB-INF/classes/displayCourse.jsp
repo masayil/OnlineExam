@@ -49,6 +49,7 @@
                     <span>
                         <img src="img/course_logo.png">
                         <h3>课程名：${Newlessonlist_class.newlesson_name}</h3>
+                         班级：${Newlessonlist_class.newlesson_class}
                         <c:forEach var="teacherlist" items="${requestScope.Teacherlist}">
                             <c:if test="${Newlessonlist_class.newlesson_creatorID eq teacherlist.t_id}">
                                 <p>授课教师：${teacherlist.t_name}</p>
@@ -73,6 +74,7 @@
                     <span>
                         <img src="img/course_logo.png">
                         <h3>课程名：${Newlessonlist_other.newlesson_name}</h3>
+                        班级：${Newlessonlist_other.newlesson_class}
                                                 <c:forEach var="teacherlist" items="${requestScope.Teacherlist}">
                                                     <c:if test="${Newlessonlist_other.newlesson_creatorID eq teacherlist.t_id}">
                                                         <p>授课教师：${teacherlist.t_name}</p>

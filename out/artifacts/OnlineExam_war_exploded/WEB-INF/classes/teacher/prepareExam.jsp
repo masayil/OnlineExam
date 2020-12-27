@@ -45,8 +45,8 @@
     班&emsp;&emsp;级：<input type="text" name="thisclass" readonly style="border: none;outline: none;" value=${thisclass}><br>
     科&emsp;&emsp;目：<input type="text" name="thiscourse" style="border: none;outline: none;" readonly value=${course}><br>
     试&emsp;&emsp;卷：<select name="paperuuid" id="paperuuid">
+    <option value="" selected>---</option>
     <c:forEach items="${requestScope.paperBaseArrayList}" var="paperBaseArrayList">
-        <option value="" selected>---</option>
         <option value=${paperBaseArrayList.paperbase_uuid}>${paperBaseArrayList.paperbase_name}</option>
     </c:forEach>
 </select><br>
